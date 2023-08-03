@@ -21,13 +21,13 @@
 
 	<link rel="shortcut icon" href="https://micro.blog/{{ .Site.Author.username }}/favicon.png" type="image/x-icon" />
 
-    {{ if {{ with .OutputFormats.Get “RSS” }}{{ .RelPermalink }}{{ end }} -}}
-      <link href="{{ {{ with .OutputFormats.Get “RSS” }}{{ .RelPermalink }}{{ end }} }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-      <link href="{{ "podcast.xml" | absURL }}" rel="alternate" type="application/rss+xml" title="Podcast" />
-      <link rel="alternate" type="application/json" title="{{ .Site.Title }}" href="{{ "feed.json" | absURL }}" />
-      <link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}" />
-    {{ end -}}
-
+{{ if with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end -}}
+    <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ "podcast.xml" | absURL }}" rel="alternate" type="application/rss+xml" title="Podcast" />
+    <link rel="alternate" type="application/json" title="{{ .Site.Title }}" href="{{ "feed.json" | absURL }}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}" />
+  {{ end -}}
+  
 	<link rel="me" href="https://micro.blog/{{ .Site.Author.username }}" />
 	{{ with .Site.Params.twitter_username }}
 		<link rel="me" href="https://twitter.com/{{ . }}" />
