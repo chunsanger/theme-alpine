@@ -19,11 +19,34 @@ html body nav.main-nav {
   html:not(.light-theme), 
   html:not(.light-theme) body {
     background-color: #2B2522 !important;
+    color: #F0E6D2 !important;
   }
   
   html:not(.light-theme) body nav.main-nav {
     background: #2B2522 !important;
     background: rgba(43, 37, 34, 0.95) !important;
+  }
+  
+  /* Force all text elements to use the light color in dark mode */
+  html:not(.light-theme) p,
+  html:not(.light-theme) li,
+  html:not(.light-theme) span,
+  html:not(.light-theme) div,
+  html:not(.light-theme) time,
+  html:not(.light-theme) article,
+  html:not(.light-theme) blockquote,
+  html:not(.light-theme) .post,
+  html:not(.light-theme) .post-body {
+    color: #F0E6D2 !important;
+  }
+  
+  html:not(.light-theme) h1,
+  html:not(.light-theme) h2,
+  html:not(.light-theme) h3,
+  html:not(.light-theme) h4,
+  html:not(.light-theme) h5,
+  html:not(.light-theme) h6 {
+    color: #F7B75D !important;
   }
 }
 
@@ -31,11 +54,44 @@ html body nav.main-nav {
 html.dark-theme,
 html.dark-theme body {
   background-color: #2B2522 !important;
+  color: #F0E6D2 !important;
 }
 
 html.dark-theme body nav.main-nav {
   background: #2B2522 !important;
   background: rgba(43, 37, 34, 0.95) !important;
+}
+
+/* Force all text elements to use the light color in dark mode */
+html.dark-theme p,
+html.dark-theme li,
+html.dark-theme span,
+html.dark-theme div,
+html.dark-theme time,
+html.dark-theme article,
+html.dark-theme blockquote,
+html.dark-theme .post,
+html.dark-theme .post-body {
+  color: #F0E6D2 !important;
+}
+
+html.dark-theme h1,
+html.dark-theme h2,
+html.dark-theme h3,
+html.dark-theme h4,
+html.dark-theme h5,
+html.dark-theme h6 {
+  color: #F7B75D !important;
+}
+
+/* Fix toggle circle vertical alignment */
+.dark-mode-toggle::after {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+html.dark-theme .dark-mode-toggle::after {
+  transform: translateX(20px) translateY(-50%) !important;
 }
 
 /* Ensure avatar displays properly */
