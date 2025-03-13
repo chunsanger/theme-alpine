@@ -28,6 +28,23 @@ body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove white bar at top */
+html {
+  background-color: var(--background-color);
+}
+
+/* Style the navigation to match the theme */
+nav.main-nav {
+  background: var(--background-color);
+  background: rgba(250, 243, 217, 0.95);
+  padding-top: 0px !important;
+  margin-top: 0 !important;
+  position: relative;
+  z-index: 100;
 }
 
 /* Style links with accent color */
@@ -56,9 +73,83 @@ nav.main-nav a.cta:hover {
   color: var(--accent-color);
 }
 
-/* Dark mode support */
+/* Make H2 headers slightly smaller and semi-bold */
+h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.7em;
+  color: var(--text-color);
+}
+
+/* Dark Mode Toggle Styles */
+.dark-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--accent-color);
+  background: transparent;
+  position: relative;
+  transition: all 0.3s;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+/* Ensure proper spacing in the nav menu */
+.site-menus {
+  display: flex;
+  align-items: center;
+}
+
+.dark-mode-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color);
+  transition: all 0.3s;
+}
+
+.dark-mode-toggle .sun-icon,
+.dark-mode-toggle .moon-icon {
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle .sun-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dark-mode-toggle .moon-icon {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+html.dark-theme .dark-mode-toggle .sun-icon {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+html.dark-theme .dark-mode-toggle .moon-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--hover-background);
+}
+
+html.dark-theme .dark-mode-toggle:hover {
+  background-color: var(--hover-background);
+}
+
+/* Dark mode support - both for class and media query */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light-theme) {
     --text-color: #F0F0F0;
     --background-color: #3D0A20;
     --hover-background: #661226;
@@ -66,36 +157,85 @@ nav.main-nav a.cta:hover {
     --link-hover-background: #B42A33;
   }
   
-  body {
+  :root:not(.light-theme) body,
+  :root:not(.light-theme) html {
     background-color: var(--background-color);
     color: var(--text-color);
   }
   
-  nav.main-nav {
+  :root:not(.light-theme) nav.main-nav {
     background: rgba(61, 10, 32, 0.9); /* Dark background for nav */
   }
   
-  nav.main-nav a {
+  :root:not(.light-theme) nav.main-nav a {
     color: var(--text-color);
   }
 
-  nav.main-nav a.cta {
+  :root:not(.light-theme) nav.main-nav a.cta {
     background: transparent;
     color: var(--accent-color);
   }
   
-  h1, h2, h3, h4, h5 {
+  :root:not(.light-theme) h1,
+  :root:not(.light-theme) h2,
+  :root:not(.light-theme) h3,
+  :root:not(.light-theme) h4,
+  :root:not(.light-theme) h5 {
     color: #FAF3D9;
   }
   
-  a {
+  :root:not(.light-theme) a {
     color: var(--accent-color);
   }
   
   /* Invert images slightly to be easier on the eyes */
-  img:not(.site-image):not(.microblog_avatar):not(.avatar) {
+  :root:not(.light-theme) img:not(.site-image):not(.microblog_avatar):not(.avatar) {
     filter: brightness(0.8) contrast(1.2);
   }
+}
+
+/* Class-based dark theme (for the toggle button) */
+html.dark-theme {
+  --text-color: #F0F0F0;
+  --background-color: #3D0A20;
+  --hover-background: #661226;
+  --link-underline: #911A2C;
+  --link-hover-background: #B42A33;
+}
+
+html.dark-theme body,
+html.dark-theme {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+html.dark-theme nav.main-nav {
+  background: rgba(61, 10, 32, 0.9); /* Dark background for nav */
+}
+
+html.dark-theme nav.main-nav a {
+  color: var(--text-color);
+}
+
+html.dark-theme nav.main-nav a.cta {
+  background: transparent;
+  color: var(--accent-color);
+}
+
+html.dark-theme h1,
+html.dark-theme h2,
+html.dark-theme h3,
+html.dark-theme h4,
+html.dark-theme h5 {
+  color: #FAF3D9;
+}
+
+html.dark-theme a {
+  color: var(--accent-color);
+}
+
+html.dark-theme img:not(.site-image):not(.microblog_avatar):not(.avatar) {
+  filter: brightness(0.8) contrast(1.2);
 }
 
 /* Custom gradient header */
