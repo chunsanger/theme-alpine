@@ -1,0 +1,122 @@
+/* Custom CSS for Alpine Theme */
+
+/* Import Atkinson Hyperlegible font */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  /* Define color variables for the theme */
+  --accent-color: #FF4F00;
+  --text-color: #333333;
+  --background-color: #FAF3D9;
+  --hover-background: #FFF8E6;
+  --link-underline: #DEDEDE;
+  --link-hover-background: #FFE7D7;
+  --gradient-1: #FAF3D9;
+  --gradient-2: #F9DA8B;
+  --gradient-3: #F7B75D;
+  --gradient-4: #F0904D;
+  --gradient-5: #E66445;
+  --gradient-6: #D13B3B;
+  --gradient-7: #B42A33;
+  --gradient-8: #911A2C;
+  --gradient-9: #661226;
+  --gradient-10: #3D0A20;
+}
+
+/* Apply fonts to all elements */
+body {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Style links with accent color */
+a {
+  color: var(--accent-color);
+}
+
+/* Update box-shadow for links to use accent color */
+nav.main-nav a, #footer a, #post-nav a, p a {
+  box-shadow: inset 0 -2px 0 var(--link-underline);
+}
+
+nav.main-nav a:hover, #footer a:hover, #post-nav a:hover, p a:hover {
+  box-shadow: inset 0 -25px 0 var(--link-hover-background);
+}
+
+/* Update CTA buttons with accent color */
+nav.main-nav a.cta {
+  background: white;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+}
+
+nav.main-nav a.cta:hover {
+  background: var(--hover-background);
+  color: var(--accent-color);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #F0F0F0;
+    --background-color: #3D0A20;
+    --hover-background: #661226;
+    --link-underline: #911A2C;
+    --link-hover-background: #B42A33;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  nav.main-nav {
+    background: rgba(61, 10, 32, 0.9); /* Dark background for nav */
+  }
+  
+  nav.main-nav a {
+    color: var(--text-color);
+  }
+
+  nav.main-nav a.cta {
+    background: transparent;
+    color: var(--accent-color);
+  }
+  
+  h1, h2, h3, h4, h5 {
+    color: #FAF3D9;
+  }
+  
+  a {
+    color: var(--accent-color);
+  }
+  
+  /* Invert images slightly to be easier on the eyes */
+  img:not(.site-image):not(.microblog_avatar):not(.avatar) {
+    filter: brightness(0.8) contrast(1.2);
+  }
+}
+
+/* Custom gradient header */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to right, 
+    var(--gradient-1), 
+    var(--gradient-2), 
+    var(--gradient-3), 
+    var(--gradient-4), 
+    var(--gradient-5), 
+    var(--gradient-6), 
+    var(--gradient-7), 
+    var(--gradient-8), 
+    var(--gradient-9), 
+    var(--gradient-10)
+  );
+  z-index: 1000;
+} 
