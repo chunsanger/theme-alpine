@@ -10,16 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.classList.add('dark-theme');
   }
   
-  // Update toggle button state
-  const toggleButton = document.getElementById('dark-mode-toggle');
-  if (toggleButton) {
-    toggleButton.checked = defaultDark;
-    toggleButton.setAttribute('aria-checked', defaultDark);
-  }
-  
   // Listen for toggle button clicks
   document.addEventListener('click', function(e) {
-    if (e.target && (e.target.id === 'dark-mode-toggle' || e.target.closest('#dark-mode-toggle-wrapper'))) {
+    if (e.target && (e.target.closest('#dark-mode-toggle-wrapper'))) {
+      toggleDarkMode();
+    }
+  });
+  
+  // Add keyboard support for accessibility
+  document.addEventListener('keydown', function(e) {
+    const toggle = document.getElementById('dark-mode-toggle-wrapper');
+    if (e.key === 'Enter' && document.activeElement === toggle) {
       toggleDarkMode();
     }
   });
@@ -29,11 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const isDark = document.documentElement.classList.toggle('dark-theme');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     
-    // Update button state
-    const toggleButton = document.getElementById('dark-mode-toggle');
+    // Update aria attributes for accessibility
+    const toggleButton = document.getElementById('dark-mode-toggle-wrapper');
     if (toggleButton) {
-      toggleButton.checked = isDark;
       toggleButton.setAttribute('aria-checked', isDark);
+    }
+    
+    // Update theme-color meta tag for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', isDark ? '#2B2522' : '#FAF3D9');
     }
   }
 }); 

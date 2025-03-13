@@ -21,6 +21,13 @@
   --gradient-8: #911A2C;
   --gradient-9: #661226;
   --gradient-10: #3D0A20;
+  
+  /* Dark mode colors - improved to complement the palette */
+  --dark-background: #2B2522;
+  --dark-text: #F0E6D2;
+  --dark-secondary: #F7B75D;
+  --dark-hover: #413831;
+  --dark-surface: #3A322D;
 }
 
 /* Apply fonts to all elements */
@@ -41,10 +48,38 @@ html {
 nav.main-nav {
   background: var(--background-color);
   background: rgba(250, 243, 217, 0.95);
-  padding-top: 0px !important;
+  padding: 12px 20px 0 !important;
   margin-top: 0 !important;
   position: relative;
   z-index: 100;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Fix avatar display */
+.site-title {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.site-image {
+  margin-right: 8px !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.site-title a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* Style links with accent color */
@@ -82,22 +117,55 @@ h2 {
   color: var(--text-color);
 }
 
-/* Dark Mode Toggle Styles */
+/* Redesigned Dark Mode Toggle - Simple Slider */
 .dark-mode-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  margin-left: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid var(--accent-color);
-  background: transparent;
   position: relative;
-  transition: all 0.3s;
-  overflow: hidden;
+  width: 42px;
+  height: 22px;
+  margin-left: 15px;
+  display: inline-block;
   vertical-align: middle;
+}
+
+.dark-mode-toggle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e0e0e0;
+  border-radius: 11px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dark-mode-toggle::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+html.dark-theme .dark-mode-toggle::before {
+  background-color: var(--accent-color);
+}
+
+html.dark-theme .dark-mode-toggle::after {
+  transform: translateX(20px);
+  background-color: white;
+}
+
+/* Hide the original SVG icons */
+.dark-mode-toggle svg {
+  display: none;
 }
 
 /* Ensure proper spacing in the nav menu */
@@ -106,55 +174,14 @@ h2 {
   align-items: center;
 }
 
-.dark-mode-toggle svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--accent-color);
-  transition: all 0.3s;
-}
-
-.dark-mode-toggle .sun-icon,
-.dark-mode-toggle .moon-icon {
-  position: absolute;
-  transition: transform 0.3s ease;
-}
-
-.dark-mode-toggle .sun-icon {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dark-mode-toggle .moon-icon {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-html.dark-theme .dark-mode-toggle .sun-icon {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-html.dark-theme .dark-mode-toggle .moon-icon {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dark-mode-toggle:hover {
-  background-color: var(--hover-background);
-}
-
-html.dark-theme .dark-mode-toggle:hover {
-  background-color: var(--hover-background);
-}
-
 /* Dark mode support - both for class and media query */
 @media (prefers-color-scheme: dark) {
   :root:not(.light-theme) {
-    --text-color: #F0F0F0;
-    --background-color: #3D0A20;
-    --hover-background: #661226;
-    --link-underline: #911A2C;
-    --link-hover-background: #B42A33;
+    --text-color: var(--dark-text);
+    --background-color: var(--dark-background);
+    --hover-background: var(--dark-hover);
+    --link-underline: rgba(255, 79, 0, 0.3);
+    --link-hover-background: rgba(255, 79, 0, 0.15);
   }
   
   :root:not(.light-theme) body,
@@ -164,7 +191,8 @@ html.dark-theme .dark-mode-toggle:hover {
   }
   
   :root:not(.light-theme) nav.main-nav {
-    background: rgba(61, 10, 32, 0.9); /* Dark background for nav */
+    background: var(--dark-background);
+    background: rgba(43, 37, 34, 0.95);
   }
   
   :root:not(.light-theme) nav.main-nav a {
@@ -181,7 +209,7 @@ html.dark-theme .dark-mode-toggle:hover {
   :root:not(.light-theme) h3,
   :root:not(.light-theme) h4,
   :root:not(.light-theme) h5 {
-    color: #FAF3D9;
+    color: var(--dark-secondary);
   }
   
   :root:not(.light-theme) a {
@@ -190,17 +218,17 @@ html.dark-theme .dark-mode-toggle:hover {
   
   /* Invert images slightly to be easier on the eyes */
   :root:not(.light-theme) img:not(.site-image):not(.microblog_avatar):not(.avatar) {
-    filter: brightness(0.8) contrast(1.2);
+    filter: brightness(0.9) contrast(1.1);
   }
 }
 
 /* Class-based dark theme (for the toggle button) */
 html.dark-theme {
-  --text-color: #F0F0F0;
-  --background-color: #3D0A20;
-  --hover-background: #661226;
-  --link-underline: #911A2C;
-  --link-hover-background: #B42A33;
+  --text-color: var(--dark-text);
+  --background-color: var(--dark-background);
+  --hover-background: var(--dark-hover);
+  --link-underline: rgba(255, 79, 0, 0.3);
+  --link-hover-background: rgba(255, 79, 0, 0.15);
 }
 
 html.dark-theme body,
@@ -210,7 +238,8 @@ html.dark-theme {
 }
 
 html.dark-theme nav.main-nav {
-  background: rgba(61, 10, 32, 0.9); /* Dark background for nav */
+  background: var(--dark-background);
+  background: rgba(43, 37, 34, 0.95);
 }
 
 html.dark-theme nav.main-nav a {
@@ -227,7 +256,7 @@ html.dark-theme h2,
 html.dark-theme h3,
 html.dark-theme h4,
 html.dark-theme h5 {
-  color: #FAF3D9;
+  color: var(--dark-secondary);
 }
 
 html.dark-theme a {
@@ -235,7 +264,7 @@ html.dark-theme a {
 }
 
 html.dark-theme img:not(.site-image):not(.microblog_avatar):not(.avatar) {
-  filter: brightness(0.8) contrast(1.2);
+  filter: brightness(0.9) contrast(1.1);
 }
 
 /* Custom gradient header */

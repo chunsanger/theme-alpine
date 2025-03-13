@@ -11,29 +11,39 @@ html, body {
 html body nav.main-nav {
   background: #FAF3D9 !important;
   background: rgba(250, 243, 217, 0.95) !important;
-  padding-top: 0 !important;
+  padding: 12px 20px 0 !important;
 }
 
 /* Override dark mode too - for both media query and class-based approach */
 @media (prefers-color-scheme: dark) {
   html:not(.light-theme), 
   html:not(.light-theme) body {
-    background-color: #3D0A20 !important;
+    background-color: #2B2522 !important;
   }
   
   html:not(.light-theme) body nav.main-nav {
-    background: #3D0A20 !important;
-    background: rgba(61, 10, 32, 0.95) !important;
+    background: #2B2522 !important;
+    background: rgba(43, 37, 34, 0.95) !important;
   }
 }
 
 /* Class-based dark theme overrides */
 html.dark-theme,
 html.dark-theme body {
-  background-color: #3D0A20 !important;
+  background-color: #2B2522 !important;
 }
 
 html.dark-theme body nav.main-nav {
-  background: #3D0A20 !important;
-  background: rgba(61, 10, 32, 0.95) !important;
+  background: #2B2522 !important;
+  background: rgba(43, 37, 34, 0.95) !important;
+}
+
+/* Ensure avatar displays properly */
+.site-image {
+  margin-right: 8px !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 } 
