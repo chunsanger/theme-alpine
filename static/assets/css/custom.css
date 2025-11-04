@@ -7,11 +7,11 @@
   /* Define color variables for the theme */
   --accent-color: #FF4F00;
   --text-color: #333333;
-  --background-color: #FAF3D9;
-  --hover-background: #FFF8E6;
+  --background-color: #F5F3F0;
+  --hover-background: #FAFAF8;
   --link-underline: #DEDEDE;
   --link-hover-background: #FFE7D7;
-  --gradient-1: #FAF3D9;
+  --gradient-1: #F5F3F0;
   --gradient-2: #F9DA8B;
   --gradient-3: #F7B75D;
   --gradient-4: #F0904D;
@@ -21,13 +21,13 @@
   --gradient-8: #911A2C;
   --gradient-9: #661226;
   --gradient-10: #3D0A20;
-  
+
   /* Dark mode colors - improved to complement the palette */
-  --dark-background: #2B2522;
-  --dark-text: #F0E6D2;
+  --dark-background: #36322E;
+  --dark-text: #E8E5E0;
   --dark-secondary: #F7B75D;
-  --dark-hover: #413831;
-  --dark-surface: #3A322D;
+  --dark-hover: #4A443F;
+  --dark-surface: #42382D;
 }
 
 /* Apply fonts to all elements */
@@ -47,7 +47,7 @@ html {
 /* Style the navigation to match the theme */
 nav.main-nav {
   background: var(--background-color);
-  background: rgba(250, 243, 217, 0.95);
+  background: rgba(245, 243, 240, 0.95);
   padding: 12px 20px 0 !important;
   margin-top: 0 !important;
   position: relative;
@@ -198,7 +198,7 @@ html.dark-theme .dark-mode-toggle::after {
   
   :root:not(.light-theme) nav.main-nav {
     background: var(--dark-background);
-    background: rgba(43, 37, 34, 0.95);
+    background: rgba(54, 50, 46, 0.95);
   }
   
   :root:not(.light-theme) nav.main-nav a {
@@ -255,7 +255,7 @@ html.dark-theme {
 
 html.dark-theme nav.main-nav {
   background: var(--dark-background);
-  background: rgba(43, 37, 34, 0.95);
+  background: rgba(54, 50, 46, 0.95);
 }
 
 html.dark-theme nav.main-nav a {

@@ -2,29 +2,29 @@
 
 /* Ensure no white spaces anywhere */
 html, body {
-  background-color: #FAF3D9 !important;
+  background-color: #F5F3F0 !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
 /* Override the navigation background with higher specificity */
 html body nav.main-nav {
-  background: #FAF3D9 !important;
-  background: rgba(250, 243, 217, 0.95) !important;
+  background: #F5F3F0 !important;
+  background: rgba(245, 243, 240, 0.95) !important;
   padding: 12px 20px 0 !important;
 }
 
 /* Override dark mode too - for both media query and class-based approach */
 @media (prefers-color-scheme: dark) {
-  html:not(.light-theme), 
+  html:not(.light-theme),
   html:not(.light-theme) body {
-    background-color: #2B2522 !important;
-    color: #F0E6D2 !important;
+    background-color: #36322E !important;
+    color: #E8E5E0 !important;
   }
-  
+
   html:not(.light-theme) body nav.main-nav {
-    background: #2B2522 !important;
-    background: rgba(43, 37, 34, 0.95) !important;
+    background: #36322E !important;
+    background: rgba(54, 50, 46, 0.95) !important;
   }
   
   /* Force all text elements to use the light color in dark mode */
@@ -53,13 +53,13 @@ html body nav.main-nav {
 /* Class-based dark theme overrides */
 html.dark-theme,
 html.dark-theme body {
-  background-color: #2B2522 !important;
-  color: #F0E6D2 !important;
+  background-color: #36322E !important;
+  color: #E8E5E0 !important;
 }
 
 html.dark-theme body nav.main-nav {
-  background: #2B2522 !important;
-  background: rgba(43, 37, 34, 0.95) !important;
+  background: #36322E !important;
+  background: rgba(54, 50, 46, 0.95) !important;
 }
 
 /* Force all text elements to use the light color in dark mode */

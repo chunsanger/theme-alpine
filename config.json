@@ -1,7 +1,7 @@
 {
 	"params": {
 		"alpine_accent_text_color": "#FF4F00",
-		"alpine_accent_background_color": "#FAF3D9",
-		"alpine_hover_background_color": "#FFF8E6"
+		"alpine_accent_background_color": "#F5F3F0",
+		"alpine_hover_background_color": "#FAFAF8"
 	}
 }
