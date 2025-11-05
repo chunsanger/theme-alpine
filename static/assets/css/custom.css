@@ -23,11 +23,11 @@
   --gradient-10: #3D0A20;
 
   /* Dark mode colors - improved to complement the palette */
-  --dark-background: #36322E;
+  --dark-background: #1A1A1A;
   --dark-text: #E8E5E0;
   --dark-secondary: #F7B75D;
-  --dark-hover: #4A443F;
-  --dark-surface: #42382D;
+  --dark-hover: #2A2A2A;
+  --dark-surface: #222222;
 }
 
 /* Apply fonts to all elements */
@@ -198,7 +198,7 @@ html.dark-theme .dark-mode-toggle::after {
   
   :root:not(.light-theme) nav.main-nav {
     background: var(--dark-background);
-    background: rgba(54, 50, 46, 0.95);
+    background: rgba(26, 26, 26, 0.95);
   }
   
   :root:not(.light-theme) nav.main-nav a {
@@ -255,7 +255,7 @@ html.dark-theme {
 
 html.dark-theme nav.main-nav {
   background: var(--dark-background);
-  background: rgba(54, 50, 46, 0.95);
+  background: rgba(26, 26, 26, 0.95);
 }
 
 html.dark-theme nav.main-nav a {

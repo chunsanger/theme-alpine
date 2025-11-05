@@ -18,13 +18,13 @@ html body nav.main-nav {
 @media (prefers-color-scheme: dark) {
   html:not(.light-theme),
   html:not(.light-theme) body {
-    background-color: #36322E !important;
+    background-color: #1A1A1A !important;
     color: #E8E5E0 !important;
   }
 
   html:not(.light-theme) body nav.main-nav {
-    background: #36322E !important;
-    background: rgba(54, 50, 46, 0.95) !important;
+    background: #1A1A1A !important;
+    background: rgba(26, 26, 26, 0.95) !important;
   }
   
   /* Force all text elements to use the light color in dark mode */
@@ -53,13 +53,13 @@ html body nav.main-nav {
 /* Class-based dark theme overrides */
 html.dark-theme,
 html.dark-theme body {
-  background-color: #36322E !important;
+  background-color: #1A1A1A !important;
   color: #E8E5E0 !important;
 }
 
 html.dark-theme body nav.main-nav {
-  background: #36322E !important;
-  background: rgba(54, 50, 46, 0.95) !important;
+  background: #1A1A1A !important;
+  background: rgba(26, 26, 26, 0.95) !important;
 }
 
 /* Force all text elements to use the light color in dark mode */
