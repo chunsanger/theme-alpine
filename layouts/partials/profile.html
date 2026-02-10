@@ -1,5 +1,4 @@
 {{ $current := .RelPermalink }}
-{{ $isPosts := or (eq .Section "post") (hasPrefix $current "/posts") }}
 {{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
 
 <div class="cover"></div>
@@ -18,7 +17,6 @@
 
 <nav class="tabs" aria-label="Sections">
   <a href="/" class="{{ if .IsHome }}active{{ end }}">All</a>
-  <a href="/posts/" class="{{ if $isPosts }}active{{ end }}">Posts</a>
   <a href="/replies/" class="{{ if $isReplies }}active{{ end }}">Replies</a>
 
   {{ range .Site.Menus.main }}
@@ -29,7 +27,7 @@
         {{ $href = . }}
       {{ end }}
     {{ end }}
-    {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) }}
+    {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) (ne (lower .Name) "about") (ne (lower .Name) "gear") }}
       <a href="{{ $href }}" class="{{ if or (eq $current $menuURL) (and (ne $menuURL "/") (hasPrefix $current $menuURL)) }}active{{ end }}">{{ .Name }}</a>
     {{ end }}
   {{ end }}
