@@ -613,24 +613,108 @@ span.divider,
 
 @media (prefers-color-scheme: dark) {
   html:not(.light-theme) {
-    --bg: #1f1f1f;
-    --card: #252525;
-    --text: #f2f2f2;
-    --muted: #b6b6b6;
-    --border: #3a3a3a;
+    --bg: #171a20;
+    --card: #22252c;
+    --text: #eceff4;
+    --muted: #aeb4bf;
+    --border: #363c46;
     --accent: #ff6a2b;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    --color-primary: #d6d6d6;
+    --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+    --color-primary: #edf1f6;
   }
 }
 
 html.dark-theme {
-  --bg: #1f1f1f;
-  --card: #252525;
-  --text: #f2f2f2;
-  --muted: #b6b6b6;
-  --border: #3a3a3a;
+  --bg: #171a20;
+  --card: #22252c;
+  --text: #eceff4;
+  --muted: #aeb4bf;
+  --border: #363c46;
   --accent: #ff6a2b;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  --color-primary: #d6d6d6;
+  --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+  --color-primary: #edf1f6;
+}
+
+html.dark-theme body {
+  color: var(--text);
+  background: radial-gradient(circle at top center, #1d2129 0%, var(--bg) 38%);
+}
+
+html.dark-theme .site-card {
+  background: var(--card);
+}
+
+html.dark-theme .cover {
+  filter: brightness(0.9) saturate(0.95);
+}
+
+html.dark-theme nav.main-nav a,
+html.dark-theme .tabs a {
+  color: #aeb4bf;
+}
+
+html.dark-theme nav.main-nav a:hover,
+html.dark-theme .tabs a:hover,
+html.dark-theme .tabs a.active {
+  color: var(--accent);
+}
+
+html.dark-theme .profile h2,
+html.dark-theme h1,
+html.dark-theme h2,
+html.dark-theme h3 {
+  color: var(--color-primary);
+}
+
+html.dark-theme .subtitle,
+html.dark-theme .post-info-date,
+html.dark-theme .post-tags,
+html.dark-theme .reply-context,
+html.dark-theme .pagination,
+html.dark-theme #footer p,
+html.dark-theme .microblog_time {
+  color: var(--muted);
+}
+
+html.dark-theme .post-body,
+html.dark-theme .post-body *,
+html.dark-theme .e-content,
+html.dark-theme .e-content * {
+  color: var(--text) !important;
+}
+
+html.dark-theme .post-body a,
+html.dark-theme .e-content a {
+  color: #d9dee7 !important;
+}
+
+html.dark-theme .post-body a:hover,
+html.dark-theme .e-content a:hover {
+  color: var(--accent) !important;
+}
+
+html.dark-theme .tabs::after,
+html.dark-theme #post-list li,
+html.dark-theme #footer,
+html.dark-theme hr {
+  border-color: var(--border);
+}
+
+html.dark-theme blockquote {
+  color: #c8ced8;
+}
+
+html.dark-theme code,
+html.dark-theme span.code {
+  background: #2d3139;
+  color: #e7ebf2;
+}
+
+html.dark-theme pre {
+  background: #1d2128;
+  color: #dbe0e9;
+}
+
+html.dark-theme .dark-mode-toggle {
+  background: #555c68;
 }
