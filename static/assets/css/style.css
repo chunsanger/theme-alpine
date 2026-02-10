@@ -227,6 +227,10 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding: 0 var(--pad) 2rem;
 }
 
+.microblog_category_intro {
+  margin-top: 0.55rem;
+}
+
 .page-title {
   margin: 0.8rem 0 1.25rem;
   font-size: 1.25rem;
