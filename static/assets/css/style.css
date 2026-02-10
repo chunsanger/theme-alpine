@@ -227,8 +227,13 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding: 0 var(--pad) 2rem;
 }
 
+#wrapper[data-page-path="/photos/"],
+#wrapper[data-page-path="/photos"] {
+  padding-top: 0.7rem;
+}
+
 .microblog_category_intro {
-  margin-top: 0.55rem;
+  padding-top: 0.55rem;
 }
 
 .page-title {

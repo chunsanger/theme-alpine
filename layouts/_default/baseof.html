@@ -5,7 +5,7 @@
   {{ partial "header.html" . }}
   <div class="site-card">
     {{ partial "profile.html" . }}
-    <main id="wrapper">
+    <main id="wrapper" data-page-path="{{ .RelPermalink }}">
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
