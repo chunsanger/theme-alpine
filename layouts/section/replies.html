@@ -1,8 +1,4 @@
 {{ define "main" }}
-  <h1 class="page-title p-name">
-    {{ if .Site.Params.paginate_replies }}Replies{{ else }}Recent Replies{{ end }}
-  </h1>
-
   <ul id="post-list" class="h-feed">
     {{ if .Site.Params.paginate_replies }}
       {{ $paginator := .Paginate (where .Data.Pages.ByDate.Reverse "Type" "reply") }}

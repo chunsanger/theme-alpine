@@ -1,5 +1,8 @@
 <li>
   <article class="h-entry">
+    {{ $content := trim .Content " \n\r\t" }}
+    {{ $summary := trim .Summary " \n\r\t" }}
+
     <aside class="post-info">
       <span class="post-info-name">
         {{ if .Params.author }}{{ .Params.author.name }}{{ else }}{{ default .Site.Title .Site.Author.name }}{{ end }}
@@ -17,7 +20,22 @@
       </header>
     {{ end }}
 
-    <section class="post-body e-content">{{ .Content }}</section>
+    {{ if ne $content "" }}
+      <section class="post-body e-content">{{ .Content }}</section>
+    {{ else if ne $summary "" }}
+      <section class="post-body e-content">{{ .Summary }}</section>
+    {{ end }}
+
+    {{ if and (eq .Type "reply") .Params.reply_to_url }}
+      <p class="reply-context">
+        Replying to
+        {{ if eq .Params.reply_to_hostname "micro.blog" }}
+          <a href="{{ .Params.reply_to_url }}" class="u-in-reply-to">@{{ .Params.reply_to_username }}</a>
+        {{ else }}
+          <a href="{{ .Params.reply_to_url }}" class="u-in-reply-to">{{ .Params.reply_to_hostname }}</a>
+        {{ end }}
+      </p>
+    {{ end }}
 
     {{ with .Params.tags }}
       <aside class="post-tags">
