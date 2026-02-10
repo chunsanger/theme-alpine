@@ -1,12 +1,15 @@
 <nav class="main-nav" aria-label="Main navigation">
   {{ range .Site.Menus.main }}
+    {{ $name := lower .Name }}
     {{ $href := .URL | relLangURL | safeURL }}
     {{ with .Page }}
       {{ with .Params.redirect_url }}
         {{ $href = . }}
       {{ end }}
     {{ end }}
-    <a href="{{ $href }}">{{ .Name }}</a>
+    {{ if and (ne $name "photos") (ne $name "archive") }}
+      <a href="{{ $href }}">{{ .Name }}</a>
+    {{ end }}
   {{ end }}
   <button id="dark-mode-toggle-wrapper" class="dark-mode-toggle" type="button" role="switch" aria-label="Toggle dark mode" aria-checked="false">
     <span class="sr-only">Toggle dark mode</span>
