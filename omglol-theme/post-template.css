@@ -1,0 +1,18 @@
+Type: Template
+Title: Post Template
+
+<article>
+{body}
+<aside class="post-info">
+	<i class="fa-solid fa-clock"></i>
+	<span class="post-info-name">Chris Hunsanger</span>
+	<a class="post-info-link" href="{location}">
+		<span class="post-info-date">{date}</span>
+	</a>
+</aside>
+<aside class="post-tags">
+	{tags}
+</aside>
+</article>
+
+<span class="divider"></span>

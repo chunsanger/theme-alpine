@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        @font-face {
+            font-family: "Departure Mono";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #f7f7f5;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --muted: #8a8a8a;
+            --border: #e6e6e6;
+            --accent: #f15a24;
+            --international-orange: #ff4f00;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 24px;
+            --pad: 2rem;
+            --font-sans: ui-sans-serif, system-ui, sans-serif,
+                "Apple Color Emoji",
+                "Segoe UI Emoji",
+                "Segoe UI Symbol",
+                "Noto Color Emoji";
+            --font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+                Consolas, "Liberation Mono", "Courier New", monospace;
+            --color-primary: oklch(14.7% 0.004 49.25);
+            --avatar-url: url("https://profiles.cache.lol/hunsanger/picture?v=1770220090");
+        }
+
+        body {
+            background: var(--bg);
+            padding: 2rem;
+            font-family: var(--font-sans);
+        }
+
+        /* Current Page Template Style */
+        .statuslog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--card);
+            padding: 20px;
+        }
+
+        .statuslog-entry {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            column-gap: 0.2rem;
+            /* Current State */
+            row-gap: 0.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .statuslog-entry::before {
+            content: "";
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background-image: var(--avatar-url);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+            grid-row: 1 / span 2;
+        }
+
+        .statuslog-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: oklch(0.709 0.01 56.259);
+        }
+
+        .statuslog-meta::before {
+            content: "@hunsanger";
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--name-color, oklch(0.147 0.004 49.25));
+        }
+
+        .statuslog-content {
+            grid-column: 2;
+        }
+
+        /* Landing Template Style (Goal) */
+        .post-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            /* Landing Page Gap */
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: oklch(0.709 0.01 56.259);
+            transition: color 160ms ease;
+            /* order: -1; */
+            /* Removing for reproduction */
+            font-weight: 400;
+        }
+
+        .post-info::before {
+            content: "";
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background-image: var(--avatar-url);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .post-info-name {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--name-color, oklch(0.147 0.004 49.25));
+        }
+
+        .landing-mimic {
+            margin-bottom: 2rem;
+            background: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Current Status Log (0.2rem gap)</h3>
+    <div class="statuslog-list">
+        <div class="statuslog-entry">
+            <div class="statuslog-meta">
+                <a href="#">2 months ago</a>
+            </div>
+            <div class="statuslog-content">
+                Lions just lost in one of the worst ways imaginable...
+            </div>
+        </div>
+    </div>
+
+    <h3>Landing Page Style (0.6rem gap)</h3>
+    <div class="landing-mimic">
+        <div class="post-info">
+            <span class="post-info-name">@hunsanger</span> <!-- Using @hunsanger instead of Chris -->
+            <span class="post-info-date">2 months ago</span>
+        </div>
+        <!-- Content logic from landing page would ideally be here but indented -->
+    </div>
+
+</body>
+
+</html>

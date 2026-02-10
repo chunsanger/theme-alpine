@@ -1,0 +1,627 @@
+Type: Template
+Title: Page Template
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{weblog-title}{separator}{post-title}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{feeds}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@font-face {
+	font-family: "Departure Mono";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--bg: #f7f7f5;
+	--card: #ffffff;
+	--text: #1a1a1a;
+	--muted: #8a8a8a;
+	--border: #e6e6e6;
+	--accent: #f15a24;
+	--international-orange: #ff4f00;
+	--shadow: 0 10px 30px rgba(0,0,0,0.08);
+	--radius: 24px;
+	--pad: 2rem;
+	--font-sans: ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji",
+		"Segoe UI Emoji",
+		"Segoe UI Symbol",
+		"Noto Color Emoji";
+	--font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+		Consolas, "Liberation Mono", "Courier New", monospace;
+	--color-primary: oklch(14.7% 0.004 49.25);
+	--avatar-url: url("https://profiles.cache.lol/hunsanger/picture?v=1770220090");
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #1f1f1f;
+		--card: #252525;
+		--text: #f2f2f2;
+		--muted: #b6b6b6;
+		--border: #3a3a3a;
+		--accent: #ff6a2b;
+		--shadow: 0 10px 30px rgba(0,0,0,0.3);
+		--name-color: #d6d6d6;
+		--profile-name-color: #d6d6d6;
+	}
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	font-family: var(--font-sans);
+	font-size: 14px;
+	color: var(--text);
+	background: var(--bg);
+}
+
+a { color: inherit; text-decoration: none; }
+
+h1 {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 30px;
+}
+
+.site-card {
+	max-width: 720px;
+	margin: 0 auto 3rem;
+	background: var(--card);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow);
+	overflow: hidden;
+}
+
+.site-header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	max-width: 720px;
+	margin: 2rem auto 0.75rem;
+	padding: 0 var(--pad);
+}
+
+.weblog-title a {
+	font-weight: 700;
+	font-size: 1.1rem;
+	display: none;
+}
+
+.site-header nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	gap: 1rem;
+}
+
+.site-header nav a {
+	color: #9c9c9c;
+	font-size: 0.85rem;
+	letter-spacing: 0.06em;
+	text-transform: lowercase;
+	font-family: var(--font-mono);
+}
+
+.site-header nav a + a {
+	margin-left: 1rem;
+}
+
+.site-header nav a::before {
+	content: "/";
+	color: #c2c2c2;
+	margin-right: 0.2rem;
+}
+
+.site-header nav a:hover {
+	color: var(--international-orange);
+}
+
+.cover {
+	height: 200px;
+	background-image: url('https://cdn.some.pics/hunsanger/698352185cddc.jpg');
+	background-size: cover;
+	background-position: center;
+	margin: 0;
+	border-radius: 0;
+}
+
+.profile {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1.5rem;
+	padding: 1.5rem var(--pad) 0.75rem;
+	align-items: center;
+}
+
+.avatar {
+	width: 96px;
+	height: 96px;
+	border-radius: 12px;
+	border: 6px solid var(--card);
+	background: #fff;
+	box-shadow: var(--shadow);
+	margin-top: -48px;
+	object-fit: cover;
+}
+
+.profile h2 {
+	margin: 0;
+	line-height: 1.05;
+	font-family: var(--font-sans);
+	font-weight: 500;
+	color: var(--profile-name-color, var(--color-primary));
+}
+
+.subtitle {
+	margin: 0.25rem 0 0;
+	color: var(--muted);
+}
+
+.tabs {
+	display: flex;
+	gap: 1.5rem;
+	padding: 0 var(--pad) 0.4rem;
+	position: relative;
+}
+
+.tabs::after {
+	content: "";
+	position: absolute;
+	left: var(--pad);
+	right: var(--pad);
+	bottom: 0;
+	height: 1px;
+	background: var(--border);
+}
+
+.tabs a {
+	color: #9c9c9c;
+	padding-bottom: 0.35rem;
+	position: relative;
+	z-index: 1;
+}
+
+.tabs a.active {
+	color: var(--accent);
+}
+
+.tabs a.active::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 2px;
+	background: var(--accent);
+	z-index: 2;
+}
+
+main {
+	padding: 0 var(--pad) 2rem;
+}
+
+main article {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+main article:last-of-type {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+main article + article {
+	margin-top: 1.5rem;
+}
+
+main article:first-of-type {
+	margin-top: 0.5rem;
+}
+
+main article > * {
+	margin: 0;
+}
+
+main article > * + * {
+	margin-top: 0.75rem;
+}
+
+main article .post-info + * {
+	margin-top: 1rem;
+}
+
+main article > :not(.post-info) {
+	margin-left: calc(32px + 0.6rem);
+}
+
+main article ul,
+main article ol {
+	margin: 0.5rem 0;
+	padding-left: 1.25rem;
+}
+
+main article a:hover {
+	color: var(--international-orange);
+}
+
+.post-info {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+	transition: color 160ms ease;
+	order: -1;
+	font-weight: 400;
+}
+
+.post-info-name {
+	font-family: var(--font-sans);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--name-color, oklch(0.147 0.004 49.25));
+}
+
+.post-info-date {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+}
+
+
+.post-tags {
+	font-size: 12px;
+	font-family: var(--font-mono);
+	color: oklch(0.709 0.01 56.259);
+	font-weight: 400;
+}
+
+.post-tags a::before {
+	content: "#";
+	margin-right: 0.15rem;
+}
+
+.post-tags a:hover {
+	color: var(--international-orange);
+}
+
+.post-info-link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.post-info-link:hover .post-info-date {
+	color: var(--international-orange);
+}
+
+main article:first-of-type .post-info {
+	margin-top: 0.8rem;
+}
+
+.post-info::before {
+	content: "";
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background-image: var(--avatar-url);
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.post-info i {
+	display: none;
+}
+
+.tag-feed-status {
+	margin: 0 0 1rem;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+}
+
+.tag-entry-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.tag-entry {
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.tag-entry:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.tag-entry-meta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+}
+
+.tag-entry-meta::before {
+	content: "";
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background-image: var(--avatar-url);
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.tag-entry-name {
+	font-family: var(--font-sans);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--name-color, oklch(0.147 0.004 49.25));
+}
+
+.tag-entry-date {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+}
+
+.tag-entry-date-link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.tag-entry-date-link:hover .tag-entry-date {
+	color: var(--international-orange);
+}
+
+.tag-entry-content {
+	margin-top: 0.75rem;
+	margin-left: calc(32px + 0.6rem);
+}
+
+.tag-entry-loading {
+	margin: 0;
+	color: var(--muted);
+}
+
+.tag-entry-content > * {
+	margin: 0;
+}
+
+.tag-entry-content > * + * {
+	margin-top: 0.75rem;
+}
+
+.tag-entry-content .post-info + * {
+	margin-top: 1rem;
+}
+
+
+.tag-entry-content ul,
+.tag-entry-content ol {
+	margin: 0.5rem 0;
+	padding-left: 1.25rem;
+}
+
+.tag-entry-content .post-info {
+	display: none;
+}
+
+.tag-index {
+	display: none;
+}
+
+main .tag-page-title {
+	display: none;
+}
+
+main article.tag-entry > * {
+	margin: 0;
+}
+
+main article.tag-entry > * + * {
+	margin-top: 0.75rem;
+}
+
+main article.tag-entry > :not(.tag-entry-content) {
+	margin-left: 0;
+}
+
+main article.tag-entry > .tag-entry-content {
+	margin-left: calc(32px + 0.6rem);
+}
+
+.statuslog-title {
+	display: none;
+}
+
+.statuslog-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.statuslog-entry {
+	display: grid;
+	grid-template-columns: 32px 1fr;
+	column-gap: 0.4rem;
+	row-gap: 0.75rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border);
+	align-items: start;
+}
+
+.statuslog-entry:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.statuslog-entry::before {
+	content: "";
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background-image: var(--avatar-url);
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+	grid-row: 1 / span 2;
+}
+
+.statuslog-emoji {
+	display: none;
+}
+
+.statuslog-meta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: oklch(0.709 0.01 56.259);
+	padding: 10px 0 0 10px;
+}
+
+.statuslog-meta::before {
+	content: "@hunsanger";
+	font-family: var(--font-sans);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--name-color, oklch(0.147 0.004 49.25));
+}
+
+.statuslog-time {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: oklch(0.709 0.01 56.259);
+}
+
+.statuslog-meta a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.statuslog-meta a:hover {
+	color: var(--international-orange);
+}
+
+.statuslog-content {
+	grid-column: 2;
+	white-space: pre-wrap;
+	padding: 10px 0 0 10px;
+}
+
+.statuslog-entry > * {
+	margin-left: 0;
+}
+
+.statuslog-body {
+	margin: 0;
+	padding: 0;
+}
+
+main #statuslog-feed article > * {
+	margin-left: 0 !important;
+}
+
+main #statuslog-feed .statuslog-entry > .statuslog-body,
+main #statuslog-feed .statuslog-entry > .statuslog-emoji {
+	margin-left: 0 !important;
+}
+
+.statuslog-content > * {
+	margin: 0;
+}
+
+.statuslog-content > * + * {
+	margin-top: 0.75rem;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background: var(--border);
+	margin: 2rem 0;
+}
+
+footer p {
+	text-align: center;
+	font-size: 0.9rem;
+	color: var(--muted);
+	padding: 2rem 0 2.5rem;
+	margin: 0;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+	<h1 class="weblog-title"><a href="/">{weblog-title}</a></h1>
+	{navigation}
+</header>
+
+<div class="site-card">
+
+	<div class="cover"></div>
+
+	<section class="profile">
+		<img class="avatar" src="https://profiles.cache.lol/hunsanger/picture?v=1770220090" alt="{weblog-title}">
+		<div>
+			<h2>{weblog-title}</h2>
+			<p class="subtitle">Thoughts, stories and ideas.</p>
+		</div>
+	</section>
+
+	<nav class="tabs">
+		<a href="/">All</a>
+		<a href="/tag/posts">Posts</a>
+		<a href="https://hunsanger.weblog.lol/status-log">Notes</a>
+		<a href="https://hunsanger.weblog.lol/photos">Photos</a>
+	</nav>
+
+	<main>
+		{body}
+		<hr>
+	</main>
+
+	<footer>
+		<p>Made with <a href="https://weblog.lol">weblog.lol</a>.</p>
+	</footer>
+
+</div>
+
+<script>
+  (function () {
+    var path = window.location.pathname.replace(/\/$/, "");
+    var tabs = document.querySelectorAll(".tabs a");
+    tabs.forEach(function (tab) {
+      var tabPath = tab.getAttribute("href").replace(/\/$/, "");
+      if (tabPath === "" && path === "") {
+        tab.classList.add("active");
+      } else if (tabPath && path === tabPath) {
+        tab.classList.add("active");
+      } else if (tabPath && path.startsWith(tabPath + "/")) {
+        tab.classList.add("active");
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

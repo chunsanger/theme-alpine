@@ -1,31 +1,15 @@
 <style>
-
-.site-title {
-	display: inline-block;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 1.35;
-	padding-left: 5px;
-	margin-top: 0px;
-	margin-bottom: 5px;
-	padding-top: 5px;
-	padding-bottom: 10px;
+:root {
+  --bg: {{ default "#f7f7f5" .Site.Params.alpine_accent_background_color }};
+  --accent: {{ default "#f15a24" .Site.Params.alpine_accent_text_color }};
+  --international-orange: {{ default "#ff4f00" .Site.Params.alpine_accent_text_color }};
+  --hover-surface: {{ default "#fafaf8" .Site.Params.alpine_hover_background_color }};
+  --cover-image: url("{{ default "https://cdn.some.pics/hunsanger/698352185cddc.jpg" .Site.Params.alpine_cover_image }}");
 }
 
-nav.main-nav a.cta {
-	background: {{ .Site.Params.alpine_accent_background_color }};
-	color: #FF4F00;
-	padding: 6px 14px;
-	border: 2px solid #FF4F00;
-	border-radius: 20px;
-	white-space: nowrap;
-	box-shadow: none;
+{{ with .Site.Author.avatar }}
+:root {
+  --avatar-url: url("{{ . }}");
 }
-
-nav.main-nav a.cta:hover {
-	background: {{ .Site.Params.alpine_hover_background_color }};
-	color: #FF4F00;
-	margin-left: 12px;
-}
-
+{{ end }}
 </style>

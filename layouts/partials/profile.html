@@ -1,13 +1,36 @@
-<!--
-<div class="profile">
-  <section id="wrapper">
-    <header class="h-card">
-      <a class="u-url" href="/about/">
-        <img id="avatar" class="u-photo" src="{{ .Site.Author.avatar }}" width="96" height="96" />
-      </a>
-      <h1 class="p-name" rel="me">{{ .Site.Author.name }}</h1>
-      <h4 class="p-role">{{ .Site.Params.description | safeHTML }}</h4>
-    </header>
-  </section>
-</div>
--->
+{{ $current := .RelPermalink }}
+{{ $isPosts := or (eq .Section "post") (hasPrefix $current "/posts") }}
+{{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
+
+<div class="cover"></div>
+
+<section class="profile">
+  <img class="avatar u-photo" src="{{ default "/favicon.ico" .Site.Author.avatar }}" alt="{{ .Site.Title }}" width="96" height="96" />
+  <div>
+    <h2 class="p-name">{{ .Site.Title }}</h2>
+    {{ with .Site.Params.description }}
+      <p class="subtitle">{{ . | plainify }}</p>
+    {{ else }}
+      <p class="subtitle">Thoughts, stories and ideas.</p>
+    {{ end }}
+  </div>
+</section>
+
+<nav class="tabs" aria-label="Sections">
+  <a href="/" class="{{ if .IsHome }}active{{ end }}">All</a>
+  <a href="/posts/" class="{{ if $isPosts }}active{{ end }}">Posts</a>
+  <a href="/replies/" class="{{ if $isReplies }}active{{ end }}">Replies</a>
+
+  {{ range .Site.Menus.main }}
+    {{ $menuURL := .URL | relLangURL }}
+    {{ $href := $menuURL | safeURL }}
+    {{ with .Page }}
+      {{ with .Params.redirect_url }}
+        {{ $href = . }}
+      {{ end }}
+    {{ end }}
+    {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) }}
+      <a href="{{ $href }}" class="{{ if or (eq $current $menuURL) (and (ne $menuURL "/") (hasPrefix $current $menuURL)) }}active{{ end }}">{{ .Name }}</a>
+    {{ end }}
+  {{ end }}
+</nav>

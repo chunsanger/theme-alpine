@@ -1,4 +1,4 @@
-{{ partial "navigation.html" . }}
-{{ if .IsHome }}
-{{ partial "profile.html" . }}
-{{ end }}
+<header class="site-header">
+  <h1 class="weblog-title"><a href="/">{{ .Site.Title }}</a></h1>
+  {{ partial "navigation.html" . }}
+</header>
