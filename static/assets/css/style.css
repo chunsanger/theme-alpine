@@ -247,6 +247,10 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   border-bottom: 1px solid var(--border);
 }
 
+#post-list li:first-child {
+  padding-top: 0.55rem;
+}
+
 #post-list li + li {
   margin-top: 1.5rem;
 }

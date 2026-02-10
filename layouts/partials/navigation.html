@@ -7,7 +7,7 @@
         {{ $href = . }}
       {{ end }}
     {{ end }}
-    {{ if and (ne $name "photos") (ne $name "archive") }}
+    {{ if and (ne $name "photos") (ne $name "archive") (ne $name "replies") }}
       <a href="{{ $href }}">{{ .Name }}</a>
     {{ end }}
   {{ end }}
