@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const setThemeState = function (isDark) {
     root.classList.toggle('dark-theme', isDark);
+    root.classList.toggle('light-theme', !isDark);
     if (toggleButton) {
       toggleButton.setAttribute('aria-checked', isDark ? 'true' : 'false');
     }
@@ -17,7 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  const defaultDark = savedTheme === 'dark' || (savedTheme === null && prefersDark);
+  // Follow system dark mode by default. Persist only explicit dark preference.
+  if (savedTheme === 'light') {
+    localStorage.removeItem('theme');
+  }
+  const defaultDark = prefersDark || savedTheme === 'dark';
   setThemeState(defaultDark);
 
   if (!toggleButton) {
@@ -27,7 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
   toggleButton.addEventListener('click', function () {
     const isDark = !root.classList.contains('dark-theme');
     setThemeState(isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (isDark) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.removeItem('theme');
+    }
   });
 
   toggleButton.addEventListener('keydown', function (event) {
@@ -35,7 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
       const isDark = !root.classList.contains('dark-theme');
       setThemeState(isDark);
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      if (isDark) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.removeItem('theme');
+      }
     }
   });
 });
