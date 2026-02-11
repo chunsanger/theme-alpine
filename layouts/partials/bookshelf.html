@@ -1,0 +1,106 @@
+{{ $shelves := .Site.Data.bookshelves }}
+{{ $goalsData := .Site.Data.bookgoals }}
+
+<section class="bookshelf-page" aria-label="Bookshelves">
+  {{ if $shelves }}
+    {{ $shelfKeys := slice }}
+    {{ range $key, $_ := $shelves }}
+      {{ $shelfKeys = $shelfKeys | append $key }}
+    {{ end }}
+    {{ $shelfKeys = sort $shelfKeys }}
+
+    {{ range $shelfKeys }}
+      {{ $shelfKey := . }}
+      {{ $books := index $shelves $shelfKey }}
+      {{ $shelfTitle := title (humanize (replace $shelfKey "-" " ")) }}
+      {{ if or (eq $shelfKey "currentlyreading") (eq $shelfKey "currently-reading") }}
+        {{ $shelfTitle = "Currently Reading" }}
+      {{ else if or (eq $shelfKey "wanttoread") (eq $shelfKey "to-read") (eq $shelfKey "want-to-read") }}
+        {{ $shelfTitle = "Want To Read" }}
+      {{ else if or (eq $shelfKey "finishedreading") (eq $shelfKey "finished-reading") }}
+        {{ $shelfTitle = "Finished Reading" }}
+      {{ end }}
+
+      <section class="bookshelf-section">
+        <h2 class="bookshelf-heading">{{ $shelfTitle }}</h2>
+        {{ if gt (len $books) 0 }}
+          <div class="bookshelf-grid">
+            {{ range $books }}
+              {{ $title := default "Untitled" (index . "title") }}
+              {{ $author := default "" (index . "author") }}
+              {{ $cover := default "" (index . "cover_url") }}
+              {{ $isbn := printf "%v" (default "" (index . "isbn")) }}
+              {{ $postURL := default "" (index . "post_url") }}
+              {{ $bookURL := "" }}
+              {{ if ne $isbn "" }}
+                {{ $bookURL = printf "https://micro.blog/books/%s" $isbn }}
+              {{ else if ne $postURL "" }}
+                {{ $bookURL = $postURL }}
+              {{ end }}
+
+              <article class="book-card">
+                {{ if ne $bookURL "" }}
+                  <a class="book-cover-link" href="{{ $bookURL }}">
+                    {{ if ne $cover "" }}
+                      <img class="book-cover" src="{{ $cover }}" alt="{{ $title }} cover" loading="lazy" />
+                    {{ else }}
+                      <div class="book-cover book-cover-placeholder">No cover</div>
+                    {{ end }}
+                  </a>
+                {{ else }}
+                  {{ if ne $cover "" }}
+                    <img class="book-cover" src="{{ $cover }}" alt="{{ $title }} cover" loading="lazy" />
+                  {{ else }}
+                    <div class="book-cover book-cover-placeholder">No cover</div>
+                  {{ end }}
+                {{ end }}
+
+                <div class="book-meta">
+                  <h3 class="book-title">
+                    {{ if ne $bookURL "" }}
+                      <a href="{{ $bookURL }}">{{ $title }}</a>
+                    {{ else }}
+                      {{ $title }}
+                    {{ end }}
+                  </h3>
+                  {{ if ne $author "" }}
+                    <p class="book-author">{{ $author }}</p>
+                  {{ end }}
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        {{ else }}
+          <p class="bookshelf-empty">No books in this shelf yet.</p>
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ else }}
+    <p class="bookshelf-empty">
+      No bookshelf data found yet. In Micro.blog, publish a page at <code>/books/</code> and assign shelves in Bookshelf settings.
+    </p>
+  {{ end }}
+
+  {{ if $goalsData }}
+    {{ $goals := slice }}
+    {{ range $key, $goal := $goalsData }}
+      {{ if and (isset $goal "year") (isset $goal "progress") (isset $goal "value") }}
+        {{ $goals = $goals | append $goal }}
+      {{ end }}
+    {{ end }}
+    {{ if gt (len $goals) 0 }}
+      {{ $goals = sort $goals "year" "desc" }}
+      <section class="bookgoals-section">
+        <h2 class="bookshelf-heading">Reading Goals</h2>
+        <ul class="bookgoals-list">
+          {{ range $goals }}
+            <li class="bookgoal-item">
+              <span class="bookgoal-year">{{ .year }}</span>
+              <span class="bookgoal-progress">{{ .progress }} / {{ .value }}</span>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  {{ end }}
+</section>
