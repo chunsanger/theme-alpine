@@ -7,9 +7,27 @@
     {{ range $key, $_ := $shelves }}
       {{ $shelfKeys = $shelfKeys | append $key }}
     {{ end }}
-    {{ $shelfKeys = sort $shelfKeys }}
+    {{ $preferredOrder := slice "reading" "currently-reading" "currentlyreading" }}
+    {{ $orderedShelfKeys := slice }}
 
+    {{ range $preferredOrder }}
+      {{ if in $shelfKeys . }}
+        {{ $orderedShelfKeys = $orderedShelfKeys | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ $remainingShelfKeys := slice }}
     {{ range $shelfKeys }}
+      {{ if not (in $orderedShelfKeys .) }}
+        {{ $remainingShelfKeys = $remainingShelfKeys | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $remainingShelfKeys = sort $remainingShelfKeys }}
+    {{ range $remainingShelfKeys }}
+      {{ $orderedShelfKeys = $orderedShelfKeys | append . }}
+    {{ end }}
+
+    {{ range $orderedShelfKeys }}
       {{ $shelfKey := . }}
       {{ $books := index $shelves $shelfKey }}
       {{ $shelfTitle := title (humanize (replace $shelfKey "-" " ")) }}
