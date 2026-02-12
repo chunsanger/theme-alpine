@@ -773,7 +773,7 @@ span.divider,
 
   .profile {
     gap: 0.85rem;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
   }
 
   .avatar {
@@ -800,9 +800,11 @@ span.divider,
   }
 
   .profile-actions {
-    grid-column: 2;
-    justify-self: start;
-    margin-top: 0.2rem;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    margin-top: 0;
   }
 
   .social-icon-button {
