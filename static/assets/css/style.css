@@ -166,8 +166,8 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 112px;
+  height: 112px;
   border-radius: 12px;
   border: 5px solid rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
@@ -229,8 +229,8 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  border: 1px solid #ff5501;
+  background: #ff5501;
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
@@ -239,8 +239,8 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 .follow-button:hover {
-  background: var(--international-orange);
-  border-color: var(--international-orange);
+  background: #e84e00;
+  border-color: #e84e00;
   transform: translateY(-1px);
 }
 
@@ -263,7 +263,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .tabs a {
   color: #9c9c9c;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.45rem;
   position: relative;
   z-index: 1;
   font-size: 0.95rem;
@@ -278,9 +278,10 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -1px;
   height: 2px;
   background: var(--accent);
+  z-index: 3;
 }
 
 #wrapper {
@@ -776,9 +777,9 @@ span.divider,
   }
 
   .avatar {
-    width: 78px;
-    height: 78px;
-    margin-top: -39px;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
     border-width: 5px;
   }
 
@@ -805,14 +806,28 @@ span.divider,
   }
 
   .social-icon-button {
-    width: 38px;
-    height: 38px;
+    display: none;
   }
 
   .follow-button {
-    height: 38px;
-    padding: 0 1rem;
-    font-size: 0.95rem;
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    padding: 0;
+    font-size: 0;
+    border-radius: 9px;
+  }
+
+  .follow-button::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    display: block;
+    margin: 0 auto;
+    background-image: url("https://api.iconify.design/lucide/user-round-plus.svg?color=%23ffffff");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 
   .bookshelf-grid {
