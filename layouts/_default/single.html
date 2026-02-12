@@ -9,10 +9,12 @@
   {{ partial "post-list.html" . }}
 {{ else }}
   <article class="h-entry post{{ if $isBooksPage }} books-page{{ end }}">
-    {{ with .Title }}
-      <header>
-        <h1 class="p-name">{{ . }}</h1>
-      </header>
+    {{ if not $isBooksPage }}
+      {{ with .Title }}
+        <header>
+          <h1 class="p-name">{{ . }}</h1>
+        </header>
+      {{ end }}
     {{ end }}
 
     {{ if not $isBooksPage }}
