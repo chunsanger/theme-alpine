@@ -1,7 +1,8 @@
 <ul id="post-list" class="h-feed">
 
 {{ if .IsHome }}
-	{{ $homePages := where .Pages.ByDate.Reverse "Type" "post" }}
+	{{ $homePages := where .Site.RegularPages "Type" "post" }}
+	{{ $homePages = $homePages.ByDate.Reverse }}
 	{{ if .Site.Params.paginate_home }}
 		{{ $paginator := .Paginate $homePages }}
 		{{ range $paginator.Pages }}
@@ -14,6 +15,21 @@
 	{{ end }}
 {{ else }}
 	{{ $sectionPages := .Pages.ByDate.Reverse }}
+	{{ if or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
+		{{ $photoPages := where .Site.RegularPages "Type" "photo" }}
+		{{ if eq (len $photoPages) 0 }}
+			{{ $photoPages = where .Site.RegularPages "Params.photos" "!=" nil }}
+		{{ end }}
+		{{ if eq (len $photoPages) 0 }}
+			{{ $photoPages = where .Site.RegularPages "Section" "photos" }}
+		{{ end }}
+		{{ if eq (len $photoPages) 0 }}
+			{{ $photoPages = where .Site.RegularPages "RelPermalink" "like" "^/photos/" }}
+		{{ end }}
+		{{ if gt (len $photoPages) 0 }}
+			{{ $sectionPages = $photoPages.ByDate.Reverse }}
+		{{ end }}
+	{{ end }}
 	{{ if .Site.Params.paginate_categories }}
 		{{ $paginator := .Paginate $sectionPages }}
 		{{ range $paginator.Pages }}
