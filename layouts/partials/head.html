@@ -14,12 +14,13 @@
       {{- end -}}
   </title>
 
-  <link href="{{ "assets/css/style.css" | relURL }}?{{ .Site.Params.theme_seconds }}" rel="stylesheet">
-  <link href="{{ "assets/css/highlight.css" | relURL }}?{{ .Site.Params.theme_seconds }}" rel="stylesheet">
-  <link href="{{ "assets/css/alpine.css" | relURL }}?{{ .Site.Params.theme_seconds }}" rel="stylesheet">
-  <link href="{{ "assets/css/custom.css" | relURL }}?{{ .Site.Params.theme_seconds }}" rel="stylesheet">
-  <link href="{{ "assets/css/override.css" | relURL }}?{{ .Site.Params.theme_seconds }}" rel="stylesheet">
-  <script src="{{ "assets/js/dark-mode.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
+  {{ $assetVersion := default (now.Unix) .Site.Params.theme_seconds }}
+  <link href="{{ "assets/css/style.css" | relURL }}?v={{ $assetVersion }}" rel="stylesheet">
+  <link href="{{ "assets/css/highlight.css" | relURL }}?v={{ $assetVersion }}" rel="stylesheet">
+  <link href="{{ "assets/css/alpine.css" | relURL }}?v={{ $assetVersion }}" rel="stylesheet">
+  <link href="{{ "assets/css/custom.css" | relURL }}?v={{ $assetVersion }}" rel="stylesheet">
+  <link href="{{ "assets/css/override.css" | relURL }}?v={{ $assetVersion }}" rel="stylesheet">
+  <script src="{{ "assets/js/dark-mode.js" | relURL }}?v={{ $assetVersion }}"></script>
   {{ partialCached "alpine.html" . }}
   {{ partial "microblog_head.html" . }}
 </head>

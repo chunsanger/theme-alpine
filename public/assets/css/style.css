@@ -65,7 +65,7 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  max-width: 720px;
+  max-width: 736px;
   margin: 2rem auto 0.75rem;
   padding: 0 var(--pad);
 }
@@ -138,7 +138,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 .site-card {
-  max-width: 720px;
+  max-width: 736px;
   margin: 0 auto 3rem;
   background: var(--card);
   border-radius: var(--radius);
@@ -147,7 +147,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 .cover {
-  height: 200px;
+  height: 288px;
   background-image: var(--cover-image), linear-gradient(120deg, #efe9db 0%, #e6cab2 100%);
   background-size: cover;
   background-position: center;
@@ -155,15 +155,19 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .profile {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   gap: 1.5rem;
   align-items: center;
   padding: 1.5rem var(--pad) 0.75rem;
 }
 
+.profile-main {
+  min-width: 0;
+}
+
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 112px;
+  height: 112px;
   border-radius: 12px;
   border: 5px solid rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
@@ -175,8 +179,9 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .profile h2 {
   margin: 0;
-  font-size: 1.625rem;
-  line-height: 1.05;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
   font-weight: 500;
   color: var(--color-primary);
 }
@@ -186,10 +191,64 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   color: var(--muted);
 }
 
+.profile-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  justify-self: end;
+}
+
+.social-icon-button {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.social-icon-logo {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.social-icon-button:hover {
+  border-color: var(--accent);
+  background: rgba(241, 90, 36, 0.08);
+  transform: translateY(-1px);
+}
+
+.follow-button {
+  height: 42px;
+  padding: 0 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #ff5501;
+  background: #ff5501;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.follow-button:hover {
+  background: #e84e00;
+  border-color: #e84e00;
+  transform: translateY(-1px);
+}
+
 .tabs {
   display: flex;
+  align-items: flex-end;
   gap: 1.5rem;
-  padding: 0 var(--pad) 0.4rem;
+  padding: 0 var(--pad);
   position: relative;
 }
 
@@ -201,11 +260,14 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   bottom: 0;
   height: 1px;
   background: var(--border);
+  z-index: 0;
 }
 
 .tabs a {
+  display: inline-block;
   color: #9c9c9c;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.62rem;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
   font-size: 0.95rem;
@@ -213,6 +275,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .tabs a.active {
   color: var(--accent);
+  border-bottom: 0;
 }
 
 .tabs a.active::after {
@@ -222,15 +285,17 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   right: 0;
   bottom: 0;
   height: 2px;
+  border-radius: 999px;
   background: var(--accent);
+  transform: translateY(1px);
+  z-index: 2;
 }
 
 #wrapper {
   padding: 0 var(--pad) 2rem;
 }
 
-#wrapper[data-page-path="/photos/"],
-#wrapper[data-page-path="/photos"] {
+#wrapper[data-page-path^="/photos"] {
   padding-top: 0.7rem;
 }
 
@@ -251,6 +316,12 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding: 0;
 }
 
+#wrapper[data-page-path="/"] #post-list,
+#wrapper[data-page-path^="/page/"] #post-list,
+#wrapper[data-page-path^="/replies"] #post-list {
+  padding-top: 0.55rem;
+}
+
 #post-list li {
   list-style: none;
   margin: 0;
@@ -259,7 +330,13 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 #post-list li:first-child {
-  padding-top: 0.55rem;
+  padding-top: 0.7rem;
+}
+
+#wrapper[data-page-path="/"] #post-list li:first-child,
+#wrapper[data-page-path^="/page/"] #post-list li:first-child,
+#wrapper[data-page-path^="/replies"] #post-list li:first-child {
+  padding-top: 0.95rem;
 }
 
 #post-list li + li {
@@ -715,19 +792,20 @@ span.divider,
 
   .profile {
     gap: 0.85rem;
+    grid-template-columns: auto 1fr auto;
   }
 
   .avatar {
-    width: 78px;
-    height: 78px;
-    margin-top: -39px;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
     border-width: 5px;
   }
 
   .tabs {
     gap: 1rem;
     overflow-x: auto;
-    padding-bottom: 0.55rem;
+    padding-bottom: 0;
   }
 
   .tabs a {
@@ -738,6 +816,39 @@ span.divider,
   .post-tags,
   .reply-context {
     margin-left: 0;
+  }
+
+  .profile-actions {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .social-icon-button {
+    display: none;
+  }
+
+  .follow-button {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+    font-size: 0;
+    border-radius: 9px;
+  }
+
+  .follow-button::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    display: block;
+    margin: 0 auto;
+    background-image: url("https://api.iconify.design/lucide/user-round-plus.svg?color=%23ffffff");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 
   .bookshelf-grid {
@@ -833,7 +944,7 @@ html.dark-theme .e-content a:hover {
   color: var(--accent) !important;
 }
 
-html.dark-theme .tabs::after,
+html.dark-theme .tabs,
 html.dark-theme #post-list li,
 html.dark-theme #footer,
 html.dark-theme hr {
@@ -861,4 +972,14 @@ html.dark-theme .dark-mode-toggle {
 
 html.dark-theme .book-card {
   background: rgba(15, 19, 24, 0.5);
+}
+
+html.dark-theme .social-icon-button {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html.dark-theme .social-icon-button:hover {
+  border-color: var(--accent);
+  background: rgba(255, 106, 43, 0.14);
 }
