@@ -246,8 +246,9 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .tabs {
   display: flex;
+  align-items: flex-end;
   gap: 1.5rem;
-  padding: 0 var(--pad) 0.4rem;
+  padding: 0 var(--pad);
   position: relative;
 }
 
@@ -259,11 +260,14 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   bottom: 0;
   height: 1px;
   background: var(--border);
+  z-index: 0;
 }
 
 .tabs a {
+  display: inline-block;
   color: #9c9c9c;
-  padding-bottom: 0.45rem;
+  padding-bottom: 0.62rem;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
   font-size: 0.95rem;
@@ -271,6 +275,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 
 .tabs a.active {
   color: var(--accent);
+  border-bottom: 0;
 }
 
 .tabs a.active::after {
@@ -280,8 +285,9 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   right: 0;
   bottom: -1px;
   height: 2px;
+  border-radius: 999px;
   background: var(--accent);
-  z-index: 3;
+  z-index: 2;
 }
 
 #wrapper {
@@ -317,7 +323,13 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 }
 
 #post-list li:first-child {
-  padding-top: 0.55rem;
+  padding-top: 0.7rem;
+}
+
+#wrapper[data-page-path="/"] #post-list li:first-child,
+#wrapper[data-page-path^="/page/"] #post-list li:first-child,
+#wrapper[data-page-path^="/replies"] #post-list li:first-child {
+  padding-top: 1.35rem;
 }
 
 #post-list li + li {
@@ -786,7 +798,7 @@ span.divider,
   .tabs {
     gap: 1rem;
     overflow-x: auto;
-    padding-bottom: 0.55rem;
+    padding-bottom: 0;
   }
 
   .tabs a {
@@ -925,7 +937,7 @@ html.dark-theme .e-content a:hover {
   color: var(--accent) !important;
 }
 
-html.dark-theme .tabs::after,
+html.dark-theme .tabs,
 html.dark-theme #post-list li,
 html.dark-theme #footer,
 html.dark-theme hr {
