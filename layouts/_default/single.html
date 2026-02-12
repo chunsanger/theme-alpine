@@ -1,29 +1,37 @@
 {{ define "main" }}
 {{ $isBooksPage := or (eq .RelPermalink "/books/") (eq .RelPermalink "/books") }}
-<article class="h-entry post{{ if $isBooksPage }} books-page{{ end }}">
-  {{ with .Title }}
-    <header>
-      <h1 class="p-name">{{ . }}</h1>
-    </header>
-  {{ end }}
+{{ $isPhotosPage := or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
+{{ $isArchivePage := or (eq .RelPermalink "/archive/") (eq .RelPermalink "/archive") }}
+{{ $isFeedStylePage := or $isPhotosPage $isArchivePage }}
 
-  {{ if not $isBooksPage }}
-    <aside class="post-info">
-      <span class="post-info-name">{{ default .Site.Title .Site.Author.name }}</span>
-      <a class="post-info-link u-url" href="{{ .Permalink }}">
-        <time class="post-info-date dt-published" datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}">
-          {{ .Date.Format "Jan 2, 2006" }}
-        </time>
-      </a>
-    </aside>
-  {{ end }}
+{{ if $isFeedStylePage }}
+  {{ partial "post-list.html" . }}
+{{ else }}
+  <article class="h-entry post{{ if $isBooksPage }} books-page{{ end }}">
+    {{ with .Title }}
+      <header>
+        <h1 class="p-name">{{ . }}</h1>
+      </header>
+    {{ end }}
 
-  <section class="e-content post-body{{ if $isBooksPage }} books-page-content{{ end }}">
-    {{ .Content }}
-  </section>
+    {{ if not $isBooksPage }}
+      <aside class="post-info">
+        <span class="post-info-name">{{ default .Site.Title .Site.Author.name }}</span>
+        <a class="post-info-link u-url" href="{{ .Permalink }}">
+          <time class="post-info-date dt-published" datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}">
+            {{ .Date.Format "Jan 2, 2006" }}
+          </time>
+        </a>
+      </aside>
+    {{ end }}
 
-  {{ if $isBooksPage }}
-    {{ partial "bookshelf.html" . }}
-  {{ end }}
-</article>
+    <section class="e-content post-body{{ if $isBooksPage }} books-page-content{{ end }}">
+      {{ .Content }}
+    </section>
+
+    {{ if $isBooksPage }}
+      {{ partial "bookshelf.html" . }}
+    {{ end }}
+  </article>
+{{ end }}
 {{ end }}

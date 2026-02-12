@@ -1,5 +1,8 @@
 <ul id="post-list" class="h-feed">
 
+{{ $isPhotosPage := or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
+{{ $isArchivePage := or (eq .RelPermalink "/archive/") (eq .RelPermalink "/archive") }}
+
 {{ if .IsHome }}
 	{{ $homePages := where .Site.RegularPages "Type" "post" }}
 	{{ $homePages = $homePages.ByDate.Reverse }}
@@ -15,7 +18,9 @@
 	{{ end }}
 {{ else }}
 	{{ $sectionPages := .Pages.ByDate.Reverse }}
-	{{ if or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
+	{{ if $isArchivePage }}
+		{{ $sectionPages = (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
+	{{ else if $isPhotosPage }}
 		{{ $photoPages := where .Site.RegularPages "Type" "photo" }}
 		{{ if eq (len $photoPages) 0 }}
 			{{ $photoPages = where .Site.RegularPages "Params.photos" "!=" nil }}
