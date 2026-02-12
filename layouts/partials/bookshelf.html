@@ -51,6 +51,7 @@
               {{ $postURL := default "" (index . "post_url") }}
               {{ $bookURL := "" }}
               {{ $coverDisplay := $cover }}
+              {{ $coverFallback := $cover }}
               {{ $upscaleBookCovers := true }}
               {{ if isset $.Site.Params "alpine_upscale_book_covers" }}
                 {{ $upscaleBookCovers = $.Site.Params.alpine_upscale_book_covers }}
@@ -58,8 +59,9 @@
 
               {{ if and (ne $coverDisplay "") (in $coverDisplay "openlibrary.org") }}
                 {{ $coverDisplay = replaceRE "-[SM]\\.jpg(\\?.*)?$" "-L.jpg$1" $coverDisplay }}
+                {{ $coverFallback = $coverDisplay }}
               {{ end }}
-              {{ if and (ne $coverDisplay "") $upscaleBookCovers }}
+              {{ if and (ne $coverDisplay "") $upscaleBookCovers (in $coverDisplay "openlibrary.org") }}
                 {{ $coverNoScheme := replaceRE "^https?://" "" $coverDisplay }}
                 {{ $coverDisplay = printf "https://images.weserv.nl/?url=%s&w=320&h=480&fit=cover&q=90&sharp=1&output=webp" ($coverNoScheme | urlquery) }}
               {{ end }}
@@ -74,14 +76,14 @@
                 {{ if ne $bookURL "" }}
                   <a class="book-cover-link" href="{{ $bookURL }}">
                     {{ if ne $cover "" }}
-                      <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" />
+                      <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" {{ if ne $coverDisplay $coverFallback }}onerror='this.onerror=null;this.src="{{ $coverFallback }}"'{{ end }} />
                     {{ else }}
                       <div class="book-cover book-cover-placeholder">No cover</div>
                     {{ end }}
                   </a>
                 {{ else }}
                   {{ if ne $cover "" }}
-                    <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" />
+                    <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" {{ if ne $coverDisplay $coverFallback }}onerror='this.onerror=null;this.src="{{ $coverFallback }}"'{{ end }} />
                   {{ else }}
                     <div class="book-cover book-cover-placeholder">No cover</div>
                   {{ end }}
