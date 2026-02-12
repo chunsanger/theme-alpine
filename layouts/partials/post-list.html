@@ -1,15 +1,28 @@
 <ul id="post-list" class="h-feed">
 
-{{ if or .IsHome .Site.Params.paginate_categories }}
-	{{ $paginator := .Paginate (where .Pages.ByDate.Reverse "Type" "post") }}
-	{{ $list := $paginator.Pages }}
-	{{ range $list  }}
-		{{ partial "post-item.html" . }}
+{{ if .IsHome }}
+	{{ $homePages := where .Pages.ByDate.Reverse "Type" "post" }}
+	{{ if .Site.Params.paginate_home }}
+		{{ $paginator := .Paginate $homePages }}
+		{{ range $paginator.Pages }}
+			{{ partial "post-item.html" . }}
+		{{ end }}
+	{{ else }}
+		{{ range $homePages }}
+			{{ partial "post-item.html" . }}
+		{{ end }}
 	{{ end }}
 {{ else }}
-	{{ $list := where .Pages.ByDate.Reverse "Type" "post" }}
-	{{ range $list  }}
-		{{ partial "post-item.html" . }}
+	{{ $sectionPages := .Pages.ByDate.Reverse }}
+	{{ if .Site.Params.paginate_categories }}
+		{{ $paginator := .Paginate $sectionPages }}
+		{{ range $paginator.Pages }}
+			{{ partial "post-item.html" . }}
+		{{ end }}
+	{{ else }}
+		{{ range $sectionPages }}
+			{{ partial "post-item.html" . }}
+		{{ end }}
 	{{ end }}
 {{ end }}
 
