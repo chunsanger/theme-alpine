@@ -1,7 +1,7 @@
 <ul id="post-list" class="h-feed">
 
-{{ $isPhotosPage := or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
-{{ $isArchivePage := or (eq .RelPermalink "/archive/") (eq .RelPermalink "/archive") }}
+{{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
+{{ $isArchivePage := hasPrefix .RelPermalink "/archive" }}
 
 {{ if .IsHome }}
 	{{ $homePages := where .Site.RegularPages "Type" "post" }}

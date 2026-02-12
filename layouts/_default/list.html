@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $isPhotosPage := or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
+  {{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
   {{ if not $isPhotosPage }}
     {{ with .Content }}
       <div class="microblog_category_intro">{{ . }}</div>

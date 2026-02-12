@@ -1,7 +1,7 @@
 {{ define "main" }}
-{{ $isBooksPage := or (eq .RelPermalink "/books/") (eq .RelPermalink "/books") }}
-{{ $isPhotosPage := or (eq .RelPermalink "/photos/") (eq .RelPermalink "/photos") }}
-{{ $isArchivePage := or (eq .RelPermalink "/archive/") (eq .RelPermalink "/archive") }}
+{{ $isBooksPage := hasPrefix .RelPermalink "/books" }}
+{{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
+{{ $isArchivePage := hasPrefix .RelPermalink "/archive" }}
 {{ $isFeedStylePage := or $isPhotosPage $isArchivePage }}
 
 {{ if $isFeedStylePage }}

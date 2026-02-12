@@ -230,8 +230,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding: 0 var(--pad) 2rem;
 }
 
-#wrapper[data-page-path="/photos/"],
-#wrapper[data-page-path="/photos"] {
+#wrapper[data-page-path^="/photos"] {
   padding-top: 0.7rem;
 }
 
