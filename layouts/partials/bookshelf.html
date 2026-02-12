@@ -50,6 +50,20 @@
               {{ $isbn := printf "%v" (default "" (index . "isbn")) }}
               {{ $postURL := default "" (index . "post_url") }}
               {{ $bookURL := "" }}
+              {{ $coverDisplay := $cover }}
+              {{ $upscaleBookCovers := true }}
+              {{ if isset $.Site.Params "alpine_upscale_book_covers" }}
+                {{ $upscaleBookCovers = $.Site.Params.alpine_upscale_book_covers }}
+              {{ end }}
+
+              {{ if and (ne $coverDisplay "") (in $coverDisplay "openlibrary.org") }}
+                {{ $coverDisplay = replaceRE "-[SM]\\.jpg(\\?.*)?$" "-L.jpg$1" $coverDisplay }}
+              {{ end }}
+              {{ if and (ne $coverDisplay "") $upscaleBookCovers }}
+                {{ $coverNoScheme := replaceRE "^https?://" "" $coverDisplay }}
+                {{ $coverDisplay = printf "https://images.weserv.nl/?url=%s&w=320&h=480&fit=cover&q=90&sharp=1&output=webp" ($coverNoScheme | urlquery) }}
+              {{ end }}
+
               {{ if ne $isbn "" }}
                 {{ $bookURL = printf "https://micro.blog/books/%s" $isbn }}
               {{ else if ne $postURL "" }}
@@ -60,14 +74,14 @@
                 {{ if ne $bookURL "" }}
                   <a class="book-cover-link" href="{{ $bookURL }}">
                     {{ if ne $cover "" }}
-                      <img class="book-cover" src="{{ $cover }}" alt="{{ $title }} cover" loading="lazy" />
+                      <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" />
                     {{ else }}
                       <div class="book-cover book-cover-placeholder">No cover</div>
                     {{ end }}
                   </a>
                 {{ else }}
                   {{ if ne $cover "" }}
-                    <img class="book-cover" src="{{ $cover }}" alt="{{ $title }} cover" loading="lazy" />
+                    <img class="book-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" />
                   {{ else }}
                     <div class="book-cover book-cover-placeholder">No cover</div>
                   {{ end }}

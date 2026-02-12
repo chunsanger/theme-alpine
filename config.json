@@ -6,6 +6,7 @@
 		"alpine_cover_image": "https://cdn.some.pics/hunsanger/698352185cddc.jpg",
 		"alpine_follow_url": "https://micro.blog/hunsanger",
 		"alpine_bluesky_url": "https://bsky.app/profile/hunsanger.com",
-		"alpine_mastodon_url": "https://social.lol/@hunsanger"
+		"alpine_mastodon_url": "https://social.lol/@hunsanger",
+		"alpine_upscale_book_covers": true
 	}
 }

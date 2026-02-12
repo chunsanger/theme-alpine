@@ -32,6 +32,11 @@
 			"field": "params.alpine_mastodon_url",
 			"label": "Mastodon URL",
 			"type": "text"
+		},
+		{
+			"field": "params.alpine_upscale_book_covers",
+			"label": "Upscale book covers",
+			"type": "boolean"
 		}
 	]
 }
