@@ -1,17 +1,34 @@
 {{ $current := .RelPermalink }}
 {{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
+{{ $defaultFollowURL := "https://micro.blog" }}
+{{ with .Site.Author.username }}
+  {{ $defaultFollowURL = printf "https://micro.blog/%s" . }}
+{{ end }}
+{{ $followURL := default $defaultFollowURL .Site.Params.alpine_follow_url }}
+{{ $blueskyURL := default "https://bsky.app/profile/hunsanger.com" .Site.Params.alpine_bluesky_url }}
+{{ $mastodonURL := default "https://social.lol/@hunsanger" .Site.Params.alpine_mastodon_url }}
 
 <div class="cover"></div>
 
 <section class="profile">
   <img class="avatar u-photo" src="{{ default "/favicon.ico" .Site.Author.avatar }}" alt="{{ .Site.Title }}" width="96" height="96" />
-  <div>
+  <div class="profile-main">
     <h2 class="p-name">{{ .Site.Title }}</h2>
     {{ with .Site.Params.description }}
       <p class="subtitle">{{ . | plainify }}</p>
     {{ else }}
       <p class="subtitle">Thoughts, stories and ideas.</p>
     {{ end }}
+  </div>
+
+  <div class="profile-actions">
+    <a class="social-icon-button" href="{{ $blueskyURL }}" target="_blank" rel="noopener noreferrer me" aria-label="Bluesky">
+      <img class="social-icon-logo" src="https://api.iconify.design/simple-icons/bluesky.svg?color=%238d8d8d" alt="" aria-hidden="true" />
+    </a>
+    <a class="social-icon-button" href="{{ $mastodonURL }}" target="_blank" rel="noopener noreferrer me" aria-label="Mastodon">
+      <img class="social-icon-logo" src="https://api.iconify.design/simple-icons/mastodon.svg?color=%238d8d8d" alt="" aria-hidden="true" />
+    </a>
+    <a class="follow-button" href="{{ $followURL }}" target="_blank" rel="noopener noreferrer">Follow</a>
   </div>
 </section>
 

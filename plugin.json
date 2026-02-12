@@ -17,6 +17,21 @@
 			"field": "params.alpine_hover_background_color",
 			"label": "Hover background color",
 			"type": "color"
+		},
+		{
+			"field": "params.alpine_follow_url",
+			"label": "Follow button URL",
+			"type": "text"
+		},
+		{
+			"field": "params.alpine_bluesky_url",
+			"label": "Bluesky URL",
+			"type": "text"
+		},
+		{
+			"field": "params.alpine_mastodon_url",
+			"label": "Mastodon URL",
+			"type": "text"
 		}
 	]
 }
