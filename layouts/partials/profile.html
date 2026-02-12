@@ -1,5 +1,6 @@
 {{ $current := .RelPermalink }}
 {{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
+{{ $currentNoSlash := strings.TrimSuffix "/" $current }}
 {{ $defaultFollowURL := "https://micro.blog" }}
 {{ with .Site.Author.username }}
   {{ $defaultFollowURL = printf "https://micro.blog/%s" . }}
@@ -38,6 +39,7 @@
 
   {{ range .Site.Menus.main }}
     {{ $menuURL := .URL | relLangURL }}
+    {{ $menuNoSlash := strings.TrimSuffix "/" $menuURL }}
     {{ $href := $menuURL | safeURL }}
     {{ with .Page }}
       {{ with .Params.redirect_url }}
@@ -45,7 +47,7 @@
       {{ end }}
     {{ end }}
     {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) (ne (lower .Name) "about") (ne (lower .Name) "gear") }}
-      <a href="{{ $href }}" class="{{ if or (eq $current $menuURL) (and (ne $menuURL "/") (hasPrefix $current $menuURL)) }}active{{ end }}">{{ .Name }}</a>
+      <a href="{{ $href }}" class="{{ if or (eq $currentNoSlash $menuNoSlash) (and (ne $menuNoSlash "") (hasPrefix $currentNoSlash (printf "%s/" $menuNoSlash))) }}active{{ end }}">{{ .Name }}</a>
     {{ end }}
   {{ end }}
 </nav>

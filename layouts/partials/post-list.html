@@ -2,6 +2,7 @@
 
 {{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
 {{ $isArchivePage := hasPrefix .RelPermalink "/archive" }}
+{{ $isRepliesPage := hasPrefix .RelPermalink "/replies" }}
 
 {{ if .IsHome }}
 	{{ $homePages := where .Site.RegularPages "Type" "post" }}
@@ -20,6 +21,8 @@
 	{{ $sectionPages := .Pages.ByDate.Reverse }}
 	{{ if $isArchivePage }}
 		{{ $sectionPages = (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
+	{{ else if $isRepliesPage }}
+		{{ $sectionPages = (where .Site.RegularPages "Type" "reply").ByDate.Reverse }}
 	{{ else if $isPhotosPage }}
 		{{ $photoPages := where .Site.RegularPages "Type" "photo" }}
 		{{ if eq (len $photoPages) 0 }}

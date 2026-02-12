@@ -2,7 +2,8 @@
 {{ $isBooksPage := hasPrefix .RelPermalink "/books" }}
 {{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
 {{ $isArchivePage := hasPrefix .RelPermalink "/archive" }}
-{{ $isFeedStylePage := or $isPhotosPage $isArchivePage }}
+{{ $isRepliesPage := hasPrefix .RelPermalink "/replies" }}
+{{ $isFeedStylePage := or $isPhotosPage $isArchivePage $isRepliesPage }}
 
 {{ if $isFeedStylePage }}
   {{ partial "post-list.html" . }}
