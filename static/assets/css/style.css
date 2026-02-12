@@ -181,7 +181,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   border-radius: 12px;
   border: 5px solid rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
-  margin-top: -48px;
+  margin-top: -56px;
   object-fit: cover;
   position: relative;
   z-index: 2;
@@ -931,7 +931,6 @@ html.dark-theme .cover {
 
 html.dark-theme .avatar {
   border-color: rgba(224, 232, 245, 0.9);
-  margin-top: -56px;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
