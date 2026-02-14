@@ -1,7 +1,7 @@
 {
   "actor": "hunsanger.com",
   "days": 30,
-  "generated_at": "2026-02-14T18:17:43.567641Z",
+  "generated_at": "2026-02-14T18:29:08.637740Z",
   "posts": [
     {
       "author_display": "Chris Hunsanger",
@@ -12,46 +12,6 @@
       "quote": null,
       "text": "I got access to RStudio's AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
       "url": "https://bsky.app/profile/hunsanger.com/post/3metlzfm3us26"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2026-02-13T02:42:22Z",
-      "created_at_unix": 1770950542,
-      "date_label": "Feb 13, 2026",
-      "quote": null,
-      "text": "App Defaults 2025: https://hunsanger.blog/2026/02/12/app-defaults.html",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3mepib2x5kz2u"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2026-02-10T18:34:23Z",
-      "created_at_unix": 1770748463,
-      "date_label": "Feb 10, 2026",
-      "quote": null,
-      "text": "Reading: Crucial Conversations: Tools for Talking When Stakes are High by Kerry Patterson 📚",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3mejm2xxk7m2s"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2026-02-10T17:50:16Z",
-      "created_at_unix": 1770745816,
-      "date_label": "Feb 10, 2026",
-      "quote": null,
-      "text": "Started Reading: Dawnshard by Brandon Sanderson 📚",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3mejjuiirgb2s"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2026-02-10T17:49:38Z",
-      "created_at_unix": 1770745778,
-      "date_label": "Feb 10, 2026",
-      "quote": null,
-      "text": "Finished reading: Oathbringer: Book Three Of The Stormlight Archive by Brandon Sanderson 📚",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3mejjudpf4l2d"
     },
     {
       "author_display": "Chris Hunsanger",
