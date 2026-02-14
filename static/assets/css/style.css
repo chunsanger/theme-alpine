@@ -556,6 +556,52 @@ thead th {
   color: var(--international-orange);
 }
 
+.bluesky-post-link a::before {
+  content: "";
+  margin: 0;
+}
+
+.bluesky-post-link a:hover {
+  color: var(--international-orange);
+}
+
+.bluesky-quote-card {
+  margin-top: 0.1rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.bluesky-quote-author {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.bluesky-quote-author span {
+  margin-left: 0.3rem;
+}
+
+.bluesky-quote-text {
+  margin-top: 0.35rem;
+}
+
+.bluesky-quote-text > :first-child {
+  margin-top: 0;
+}
+
+.bluesky-quote-link {
+  margin: 0.45rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.bluesky-quote-link a:hover {
+  color: var(--international-orange);
+}
+
 .dates,
 #post-meta,
 span.separator,
@@ -977,6 +1023,11 @@ html.dark-theme .e-content a {
 html.dark-theme .post-body a:hover,
 html.dark-theme .e-content a:hover {
   color: var(--accent) !important;
+}
+
+html.dark-theme .bluesky-quote-card {
+  background: rgba(16, 20, 27, 0.58);
+  border-color: var(--border);
 }
 
 html.dark-theme .tabs,

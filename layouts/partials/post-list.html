@@ -7,14 +7,30 @@
 {{ if .IsHome }}
 	{{ $homePages := where .Site.RegularPages "Type" "post" }}
 	{{ $homePages = $homePages.ByDate.Reverse }}
+	{{ $homeFeed := slice }}
+
+	{{ range $homePages }}
+		{{ $homeFeed = $homeFeed | append (dict "kind" "microblog" "timestamp" .Date.Unix "page" .) }}
+	{{ end }}
+
+	{{ with .Site.Data.bluesky_feed }}
+		{{ range .posts }}
+			{{ if and .created_at_unix .url }}
+				{{ $homeFeed = $homeFeed | append (dict "kind" "bluesky" "timestamp" .created_at_unix "item" .) }}
+			{{ end }}
+		{{ end }}
+	{{ end }}
+
+	{{ $homeFeed = sort $homeFeed "timestamp" "desc" }}
+
 	{{ if .Site.Params.paginate_home }}
-		{{ $paginator := .Paginate $homePages }}
+		{{ $paginator := .Paginate $homeFeed }}
 		{{ range $paginator.Pages }}
-			{{ partial "post-item.html" . }}
+			{{ partial "home-feed-item.html" . }}
 		{{ end }}
 	{{ else }}
-		{{ range $homePages }}
-			{{ partial "post-item.html" . }}
+		{{ range $homeFeed }}
+			{{ partial "home-feed-item.html" . }}
 		{{ end }}
 	{{ end }}
 {{ else }}

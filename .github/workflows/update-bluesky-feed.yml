@@ -1,0 +1,36 @@
+name: Update Bluesky Feed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch Bluesky posts
+        run: python scripts/fetch_bluesky_feed.py --actor hunsanger.com --days 30 --output data/bluesky_feed.json
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- data/bluesky_feed.json; then
+            echo "No data changes detected."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/bluesky_feed.json
+          git commit -m "chore: update Bluesky feed data"
+          git push

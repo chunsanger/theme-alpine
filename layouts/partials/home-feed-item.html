@@ -1,0 +1,5 @@
+{{ if eq .kind "microblog" }}
+  {{ partial "post-item.html" .page }}
+{{ else if eq .kind "bluesky" }}
+  {{ partial "bluesky-item.html" .item }}
+{{ end }}

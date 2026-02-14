@@ -1,0 +1,41 @@
+<li class="bluesky-feed-item">
+  <article class="h-entry bluesky-entry">
+    <aside class="post-info bluesky-post-info">
+      <span class="post-info-name">{{ default .author_display .author_handle }}</span>
+      <a class="post-info-link u-url" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+        <time datetime="{{ .created_at }}" class="post-info-date dt-published">
+          {{ default .created_at .date_label }}
+        </time>
+      </a>
+    </aside>
+
+    {{ with .text }}
+      <section class="post-body e-content">
+        {{ . | markdownify }}
+      </section>
+    {{ end }}
+
+    {{ with .quote }}
+      <aside class="post-body bluesky-quote-card">
+        <p class="bluesky-quote-author">
+          {{ if .author_display }}{{ .author_display }}{{ else }}@{{ .author_handle }}{{ end }}
+          {{ if .author_handle }}<span>@{{ .author_handle }}</span>{{ end }}
+        </p>
+        {{ with .text }}
+          <div class="bluesky-quote-text">{{ . | markdownify }}</div>
+        {{ else }}
+          <div class="bluesky-quote-text"><em>Quoted post unavailable.</em></div>
+        {{ end }}
+        {{ with .url }}
+          <p class="bluesky-quote-link">
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">View quoted post</a>
+          </p>
+        {{ end }}
+      </aside>
+    {{ end }}
+
+    <p class="post-tags bluesky-post-link">
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">View on Bluesky</a>
+    </p>
+  </article>
+</li>
