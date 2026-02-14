@@ -15,7 +15,10 @@
 
 	{{ with .Site.Data.bluesky_feed }}
 		{{ range .posts }}
-			{{ if and .created_at_unix .url }}
+			{{ $textLower := lower (strings.TrimSpace (default "" .text)) }}
+			{{ $isBookStatus := or (hasPrefix $textLower "started reading:") (hasPrefix $textLower "reading:") (hasPrefix $textLower "finished reading:") }}
+			{{ $isSelfSiteLink := in $textLower "hunsanger.blog" }}
+			{{ if and .created_at_unix .url (not $isBookStatus) (not $isSelfSiteLink) }}
 				{{ $homeFeed = $homeFeed | append (dict "kind" "bluesky" "timestamp" .created_at_unix "item" .) }}
 			{{ end }}
 		{{ end }}

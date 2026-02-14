@@ -18,6 +18,12 @@ from pathlib import Path
 from typing import Any
 
 API_URL = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed"
+BOOK_ACTIVITY_PREFIXES = (
+    "started reading:",
+    "reading:",
+    "finished reading:",
+)
+SELF_SITE_DOMAIN = "hunsanger.blog"
 
 
 def parse_args() -> argparse.Namespace:
@@ -45,6 +51,27 @@ def at_uri_to_web_url(at_uri: str, handle: str) -> str:
         return ""
     post_id = at_uri.rsplit("/", 1)[-1]
     return f"https://bsky.app/profile/{handle}/post/{post_id}"
+
+
+def is_book_activity(text: str) -> bool:
+    normalized = text.strip().lower()
+    return any(normalized.startswith(prefix) for prefix in BOOK_ACTIVITY_PREFIXES)
+
+
+def is_self_site_link(text: str, record: dict[str, Any]) -> bool:
+    text_lower = text.strip().lower()
+    if SELF_SITE_DOMAIN in text_lower:
+        return True
+
+    for facet in record.get("facets") or []:
+        for feature in facet.get("features") or []:
+            if feature.get("$type") != "app.bsky.richtext.facet#link":
+                continue
+            uri = (feature.get("uri") or "").lower()
+            if SELF_SITE_DOMAIN in uri:
+                return True
+
+    return False
 
 
 def extract_quote(embed: dict[str, Any]) -> dict[str, str] | None:
@@ -149,6 +176,10 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
 
             text = (record.get("text") or "").strip()
             quote = extract_quote(post.get("embed") or {})
+            if text and is_book_activity(text):
+                continue
+            if text and is_self_site_link(text, record):
+                continue
             if not text and not quote:
                 continue
 
