@@ -1,7 +1,7 @@
 {
   "actor": "hunsanger.com",
   "days": 30,
-  "generated_at": "2026-02-16T12:15:35.832211Z",
+  "generated_at": "2026-02-16T18:07:02.397596Z",
   "posts": [
     {
       "author_display": "Chris Hunsanger",
@@ -10,6 +10,7 @@
       "created_at_unix": 1771092020,
       "date_label": "Feb 14, 2026",
       "quote": null,
+      "text_html": "I got access to RStudio&#x27;s AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
       "text": "I got access to RStudio's AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
       "url": "https://bsky.app/profile/hunsanger.com/post/3metlzfm3us26"
     },
@@ -20,6 +21,7 @@
       "created_at_unix": 1769740224,
       "date_label": "Jan 30, 2026",
       "quote": null,
+      "text_html": "Testing…",
       "text": "Testing…",
       "url": "https://bsky.app/profile/hunsanger.com/post/3mdmb2rbq3d26"
     },
@@ -30,6 +32,7 @@
       "created_at_unix": 1769565971,
       "date_label": "Jan 28, 2026",
       "quote": null,
+      "text_html": "I took the excellent work by <a href=\"https://bsky.app/profile/did:plc:lprqqpoyjspuma25n5gofocf\" target=\"_blank\" rel=\"noopener noreferrer\">@josephjefe.bsky.social</a>  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. <br>\n<br>\n<a href=\"https://hunsanger.shinyapps.io/shiny/\" target=\"_blank\" rel=\"noopener noreferrer\">hunsanger.shinyapps.io/shiny/</a>",
       "text": "I took the excellent work by @josephjefe.bsky.social  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. \n\nhunsanger.shinyapps.io/shiny/",
       "url": "https://bsky.app/profile/hunsanger.com/post/3mdh6rlz7pc2o"
     }
