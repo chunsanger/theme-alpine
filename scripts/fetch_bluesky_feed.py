@@ -32,9 +32,9 @@ def parse_args() -> argparse.Namespace:
         description="Fetch Bluesky posts and write Hugo data JSON."
     )
     parser.add_argument("--actor", required=True, help="Bluesky handle (e.g. hunsanger.com).")
-    parser.add_argument("--days", type=int, default=30, help="Only include posts from the last N days.")
+    parser.add_argument("--days", type=int, default=180, help="Only include posts from the last N days.")
     parser.add_argument("--output", default="data/bluesky_feed.json", help="Output JSON path.")
-    parser.add_argument("--max-pages", type=int, default=20, help="Maximum paginated API pages to fetch.")
+    parser.add_argument("--max-pages", type=int, default=60, help="Maximum paginated API pages to fetch.")
     parser.add_argument("--timeout", type=float, default=20.0, help="HTTP timeout in seconds.")
     return parser.parse_args()
 

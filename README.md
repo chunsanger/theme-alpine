@@ -11,13 +11,12 @@ This theme can merge recent Bluesky posts directly into the homepage timeline.
 ### Manual refresh
 
 ```bash
-python3 scripts/fetch_bluesky_feed.py --actor hunsanger.com --days 30 --output data/bluesky_feed.json
+python3 scripts/fetch_bluesky_feed.py --actor hunsanger.com --days 180 --max-pages 60 --output data/bluesky_feed.json
 ```
 
 This fetches:
-- posts from the last 30 days
+- posts from the last 180 days (up to 60 API pages)
 - excludes replies
-- excludes reposts
 - includes quote posts (with quoted content when available)
 - excludes book-status duplicates that start with `Started Reading:`, `Reading:`, or `Finished Reading:`
 - excludes posts that link back to `hunsanger.blog`
@@ -34,5 +33,6 @@ This fetches:
 GitHub Actions workflow:
 - `.github/workflows/update-bluesky-feed.yml`
 - runs every 6 hours
+- uses `BLUESKY_LOOKBACK_DAYS` and `BLUESKY_MAX_PAGES` env vars for fetch depth
 - rewrites `data/bluesky_feed.json`
 - commits changes automatically when data changes

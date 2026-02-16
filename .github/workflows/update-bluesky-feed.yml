@@ -11,6 +11,9 @@ permissions:
 jobs:
   update-feed:
     runs-on: ubuntu-latest
+    env:
+      BLUESKY_LOOKBACK_DAYS: "180"
+      BLUESKY_MAX_PAGES: "60"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,7 +24,7 @@ jobs:
           python-version: "3.11"
 
       - name: Fetch Bluesky posts
-        run: python scripts/fetch_bluesky_feed.py --actor hunsanger.com --days 30 --output data/bluesky_feed.json
+        run: python scripts/fetch_bluesky_feed.py --actor hunsanger.com --days "${BLUESKY_LOOKBACK_DAYS}" --max-pages "${BLUESKY_MAX_PAGES}" --output data/bluesky_feed.json
 
       - name: Commit and push if changed
         run: |
