@@ -338,28 +338,28 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding-top: 0.55rem;
 }
 
-#post-list li {
+#post-list > li {
   list-style: none;
   margin: 0;
   padding: 0 0 1.5rem;
   border-bottom: 1px solid var(--border);
 }
 
-#post-list li:first-child {
+#post-list > li:first-child {
   padding-top: 0.7rem;
 }
 
-#wrapper[data-page-path="/"] #post-list li:first-child,
-#wrapper[data-page-path^="/page/"] #post-list li:first-child,
-#wrapper[data-page-path^="/replies"] #post-list li:first-child {
+#wrapper[data-page-path="/"] #post-list > li:first-child,
+#wrapper[data-page-path^="/page/"] #post-list > li:first-child,
+#wrapper[data-page-path^="/replies"] #post-list > li:first-child {
   padding-top: 0.95rem;
 }
 
-#post-list li + li {
+#post-list > li + li {
   margin-top: 1.5rem;
 }
 
-#post-list li:last-child {
+#post-list > li:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -1095,7 +1095,7 @@ html.dark-theme .bluesky-quote-card {
 }
 
 html.dark-theme .tabs,
-html.dark-theme #post-list li,
+html.dark-theme #post-list > li,
 html.dark-theme #footer,
 html.dark-theme hr {
   border-color: var(--border);
