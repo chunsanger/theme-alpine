@@ -1,7 +1,7 @@
 {
   "actor": "hunsanger.com",
   "days": 30,
-  "generated_at": "2026-02-16T18:14:00.975655Z",
+  "generated_at": "2026-02-16T22:09:54.621507Z",
   "posts": [
     {
       "author_display": "Chris Hunsanger",
@@ -9,6 +9,9 @@
       "created_at": "2026-02-14T18:00:20.104000Z",
       "created_at_unix": 1771092020,
       "date_label": "Feb 14, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
       "quote": null,
       "text_html": "I got access to RStudio&#x27;s AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
       "text": "I got access to RStudio's AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
@@ -20,6 +23,9 @@
       "created_at": "2026-01-30T02:30:24.878000Z",
       "created_at_unix": 1769740224,
       "date_label": "Jan 30, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
       "quote": null,
       "text_html": "Testing…",
       "text": "Testing…",
@@ -31,6 +37,9 @@
       "created_at": "2026-01-28T02:06:11.244000Z",
       "created_at_unix": 1769565971,
       "date_label": "Jan 28, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
       "quote": null,
       "text_html": "I took the excellent work by <a href=\"https://bsky.app/profile/did:plc:lprqqpoyjspuma25n5gofocf\" target=\"_blank\" rel=\"noopener noreferrer\">@josephjefe.bsky.social</a>  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. <br>\n<br>\n<a href=\"https://hunsanger.shinyapps.io/shiny/\" target=\"_blank\" rel=\"noopener noreferrer\">hunsanger.shinyapps.io/shiny/</a>",
       "text": "I took the excellent work by @josephjefe.bsky.social  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. \n\nhunsanger.shinyapps.io/shiny/",
