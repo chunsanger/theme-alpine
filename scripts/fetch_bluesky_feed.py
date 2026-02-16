@@ -211,8 +211,7 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
 
         for entry in entries:
             reason = entry.get("reason") or {}
-            if reason.get("$type") == "app.bsky.feed.defs#reasonRepost":
-                continue
+            is_repost = reason.get("$type") == "app.bsky.feed.defs#reasonRepost"
 
             post = entry.get("post") or {}
             record = post.get("record") or {}
@@ -228,7 +227,14 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
             except ValueError:
                 continue
 
-            if created_at < cutoff:
+            activity_at = created_at
+            if is_repost and reason.get("indexedAt"):
+                try:
+                    activity_at = parse_created_at(reason.get("indexedAt", ""))
+                except ValueError:
+                    activity_at = created_at
+
+            if activity_at < cutoff:
                 continue
 
             saw_recent = True
@@ -260,9 +266,12 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
                 {
                     "author_display": author_display,
                     "author_handle": author_handle,
-                    "created_at": created_at.isoformat().replace("+00:00", "Z"),
-                    "created_at_unix": int(created_at.timestamp()),
-                    "date_label": date_label(created_at),
+                    "created_at": activity_at.isoformat().replace("+00:00", "Z"),
+                    "created_at_unix": int(activity_at.timestamp()),
+                    "date_label": date_label(activity_at),
+                    "is_repost": is_repost,
+                    "reposted_by_display": ((reason.get("by") or {}).get("displayName") or (reason.get("by") or {}).get("handle") or ""),
+                    "reposted_by_handle": ((reason.get("by") or {}).get("handle") or ""),
                     "quote": quote,
                     "text_html": text_html,
                     "text": text,

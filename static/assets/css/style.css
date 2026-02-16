@@ -586,6 +586,13 @@ thead th {
   position: relative;
 }
 
+.bluesky-repost-context {
+  margin: 0 0 0.35rem calc(32px + 0.6rem);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 .bluesky-entry .bluesky-post-info {
   padding-right: 1.9rem;
 }

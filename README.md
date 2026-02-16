@@ -23,6 +23,12 @@ This fetches:
 - excludes posts that link back to `hunsanger.blog`
 - keeps Bluesky `@mentions` and links clickable in rendered feed items
 
+## Feed sections
+
+- `/posts/`: Micro.blog posts only
+- `/notes/`: Bluesky posts + reposts (using the same feed card styling)
+- `/archive/`: still available if linked directly, but hidden from nav tabs by default
+
 ### Automated refresh
 
 GitHub Actions workflow:

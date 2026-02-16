@@ -2,6 +2,15 @@
   <article class="h-entry bluesky-entry">
     <a class="bluesky-corner-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="Open on Bluesky"></a>
 
+    {{ if .is_repost }}
+      <p class="reply-context bluesky-repost-context">
+        Reposted
+        {{ if .reposted_by_handle }}
+          by <a href="https://bsky.app/profile/{{ .reposted_by_handle }}" target="_blank" rel="noopener noreferrer">@{{ .reposted_by_handle }}</a>
+        {{ end }}
+      </p>
+    {{ end }}
+
     <aside class="post-info bluesky-post-info">
       <span class="post-info-name">{{ default .author_display .author_handle }}</span>
       <a class="post-info-link u-url" href="{{ .url }}" target="_blank" rel="noopener noreferrer">

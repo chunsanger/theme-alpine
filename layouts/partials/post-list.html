@@ -3,6 +3,8 @@
 {{ $isPhotosPage := hasPrefix .RelPermalink "/photos" }}
 {{ $isArchivePage := hasPrefix .RelPermalink "/archive" }}
 {{ $isRepliesPage := hasPrefix .RelPermalink "/replies" }}
+{{ $isPostsPage := hasPrefix .RelPermalink "/posts" }}
+{{ $isNotesPage := hasPrefix .RelPermalink "/notes" }}
 
 {{ if .IsHome }}
 	{{ $homePages := where .Site.RegularPages "Type" "post" }}
@@ -18,7 +20,7 @@
 			{{ $textLower := lower (trim (printf "%v" (default "" .text)) " \n\r\t") }}
 			{{ $isBookStatus := or (hasPrefix $textLower "started reading:") (hasPrefix $textLower "reading:") (hasPrefix $textLower "finished reading:") }}
 			{{ $isSelfSiteLink := in $textLower "hunsanger.blog" }}
-			{{ if and .created_at_unix .url (not $isBookStatus) (not $isSelfSiteLink) }}
+			{{ if and .created_at_unix .url (not .is_repost) (not $isBookStatus) (not $isSelfSiteLink) }}
 				{{ $homeFeed = $homeFeed | append (dict "kind" "bluesky" "timestamp" .created_at_unix "item" .) }}
 			{{ end }}
 		{{ end }}
@@ -37,8 +39,32 @@
 		{{ end }}
 	{{ end }}
 {{ else }}
+	{{ if $isNotesPage }}
+		{{ $notesFeed := slice }}
+		{{ with .Site.Data.bluesky_feed }}
+			{{ range .posts }}
+				{{ $textLower := lower (trim (printf "%v" (default "" .text)) " \n\r\t") }}
+				{{ $isBookStatus := or (hasPrefix $textLower "started reading:") (hasPrefix $textLower "reading:") (hasPrefix $textLower "finished reading:") }}
+				{{ $isSelfSiteLink := in $textLower "hunsanger.blog" }}
+				{{ if and .created_at_unix .url (not $isBookStatus) (not $isSelfSiteLink) }}
+					{{ $notesFeed = $notesFeed | append (dict "kind" "bluesky" "timestamp" .created_at_unix "item" .) }}
+				{{ end }}
+			{{ end }}
+		{{ end }}
+		{{ $notesFeed = sort $notesFeed "timestamp" "desc" }}
+		{{ if .Site.Params.paginate_categories }}
+			{{ $paginator := .Paginate $notesFeed }}
+			{{ range $paginator.Pages }}
+				{{ partial "home-feed-item.html" . }}
+			{{ end }}
+		{{ else }}
+			{{ range $notesFeed }}
+				{{ partial "home-feed-item.html" . }}
+			{{ end }}
+		{{ end }}
+	{{ else }}
 	{{ $sectionPages := .Pages.ByDate.Reverse }}
-	{{ if $isArchivePage }}
+	{{ if or $isArchivePage $isPostsPage }}
 		{{ $sectionPages = (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
 	{{ else if $isRepliesPage }}
 		{{ $sectionPages = (where .Site.RegularPages "Type" "reply").ByDate.Reverse }}
@@ -66,6 +92,7 @@
 		{{ range $sectionPages }}
 			{{ partial "post-item.html" . }}
 		{{ end }}
+	{{ end }}
 	{{ end }}
 {{ end }}
 
