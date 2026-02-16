@@ -13,9 +13,9 @@
 		{{ $homeFeed = $homeFeed | append (dict "kind" "microblog" "timestamp" .Date.Unix "page" .) }}
 	{{ end }}
 
-	{{ with .Site.Data.bluesky_feed }}
+		{{ with .Site.Data.bluesky_feed }}
 		{{ range .posts }}
-			{{ $textLower := lower (strings.TrimSpace (default "" .text)) }}
+			{{ $textLower := lower (trim (printf "%v" (default "" .text)) " \n\r\t") }}
 			{{ $isBookStatus := or (hasPrefix $textLower "started reading:") (hasPrefix $textLower "reading:") (hasPrefix $textLower "finished reading:") }}
 			{{ $isSelfSiteLink := in $textLower "hunsanger.blog" }}
 			{{ if and .created_at_unix .url (not $isBookStatus) (not $isSelfSiteLink) }}
