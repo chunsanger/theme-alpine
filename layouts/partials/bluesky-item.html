@@ -13,10 +13,12 @@
       <section class="post-body e-content">
         {{ .text_html | safeHTML }}
       </section>
-    {{ else with .text }}
-      <section class="post-body e-content">
-        {{ . | markdownify }}
-      </section>
+    {{ else }}
+      {{ with .text }}
+        <section class="post-body e-content">
+          {{ . | markdownify }}
+        </section>
+      {{ end }}
     {{ end }}
 
     {{ with .quote }}
@@ -27,10 +29,12 @@
         </p>
         {{ if .text_html }}
           <div class="bluesky-quote-text">{{ .text_html | safeHTML }}</div>
-        {{ else with .text }}
-          <div class="bluesky-quote-text">{{ . | markdownify }}</div>
         {{ else }}
-          <div class="bluesky-quote-text"><em>Quoted post unavailable.</em></div>
+          {{ with .text }}
+            <div class="bluesky-quote-text">{{ . | markdownify }}</div>
+          {{ else }}
+            <div class="bluesky-quote-text"><em>Quoted post unavailable.</em></div>
+          {{ end }}
         {{ end }}
         {{ with .url }}
           <p class="bluesky-quote-link">
