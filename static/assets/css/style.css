@@ -16,6 +16,8 @@
   --border: #e6e6e6;
   --accent: #f15a24;
   --international-orange: #ff4f00;
+  --content-link-underline: #c9c9c9;
+  --content-link-underline-hover: #aeb0b3;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --radius: 24px;
   --pad: 2rem;
@@ -448,8 +450,21 @@ article.post > * + * {
   list-style: inherit;
 }
 
-.post-body a:hover {
+.post-body a,
+.reply-context a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--content-link-underline);
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
+}
+
+.post-body a:hover,
+.reply-context a:hover {
   color: var(--international-orange);
+  text-decoration-color: var(--international-orange);
 }
 
 h1,
@@ -946,6 +961,8 @@ img.book-cover {
     --muted: #aeb4bf;
     --border: #363c46;
     --accent: #ff6a2b;
+    --content-link-underline: #5f6672;
+    --content-link-underline-hover: #7a8495;
     --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
     --color-primary: #edf1f6;
   }
@@ -958,6 +975,8 @@ html.dark-theme {
   --muted: #aeb4bf;
   --border: #363c46;
   --accent: #ff6a2b;
+  --content-link-underline: #5f6672;
+  --content-link-underline-hover: #7a8495;
   --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
   --color-primary: #edf1f6;
 }
@@ -1016,13 +1035,17 @@ html.dark-theme .e-content * {
 }
 
 html.dark-theme .post-body a,
-html.dark-theme .e-content a {
-  color: #d9dee7 !important;
+html.dark-theme .e-content a,
+html.dark-theme .reply-context a {
+  color: var(--text) !important;
+  text-decoration-color: var(--content-link-underline);
 }
 
 html.dark-theme .post-body a:hover,
-html.dark-theme .e-content a:hover {
+html.dark-theme .e-content a:hover,
+html.dark-theme .reply-context a:hover {
   color: var(--accent) !important;
+  text-decoration-color: var(--accent);
 }
 
 html.dark-theme .bluesky-quote-card {
