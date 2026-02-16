@@ -21,6 +21,7 @@ This fetches:
 - includes quote posts (with quoted content when available)
 - excludes book-status duplicates that start with `Started Reading:`, `Reading:`, or `Finished Reading:`
 - excludes posts that link back to `hunsanger.blog`
+- keeps Bluesky `@mentions` and links clickable in rendered feed items
 
 ### Automated refresh
 

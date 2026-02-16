@@ -8,6 +8,7 @@ rendered as part of the homepage feed.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import sys
 import urllib.error
@@ -74,6 +75,74 @@ def is_self_site_link(text: str, record: dict[str, Any]) -> bool:
     return False
 
 
+def byte_index_to_char_index(text: str, byte_index: int) -> int:
+    if byte_index <= 0:
+        return 0
+    return len(text.encode("utf-8")[:byte_index].decode("utf-8", errors="ignore"))
+
+
+def render_rich_text_html(text: str, facets: list[dict[str, Any]] | None) -> str:
+    if not text:
+        return ""
+
+    facets = facets or []
+    links: list[tuple[int, int, str]] = []
+
+    for facet in facets:
+        index = facet.get("index") or {}
+        byte_start = index.get("byteStart")
+        byte_end = index.get("byteEnd")
+        if not isinstance(byte_start, int) or not isinstance(byte_end, int) or byte_end <= byte_start:
+            continue
+
+        start = byte_index_to_char_index(text, byte_start)
+        end = byte_index_to_char_index(text, byte_end)
+        if end <= start:
+            continue
+
+        url = ""
+        for feature in facet.get("features") or []:
+            feature_type = feature.get("$type")
+            if feature_type == "app.bsky.richtext.facet#link":
+                url = (feature.get("uri") or "").strip()
+                break
+            if feature_type == "app.bsky.richtext.facet#mention":
+                did = (feature.get("did") or "").strip()
+                if did:
+                    url = f"https://bsky.app/profile/{did}"
+                    break
+
+        if url:
+            links.append((start, end, url))
+
+    links.sort(key=lambda item: (item[0], item[1]))
+
+    # Skip overlapping spans to keep output deterministic.
+    filtered_links: list[tuple[int, int, str]] = []
+    cursor = -1
+    for start, end, url in links:
+        if start < cursor:
+            continue
+        filtered_links.append((start, end, url))
+        cursor = end
+
+    parts: list[str] = []
+    last = 0
+    for start, end, url in filtered_links:
+        if start > last:
+            parts.append(html.escape(text[last:start]).replace("\n", "<br>\n"))
+
+        label = html.escape(text[start:end])
+        href = html.escape(url, quote=True)
+        parts.append(f'<a href="{href}" target="_blank" rel="noopener noreferrer">{label}</a>')
+        last = end
+
+    if last < len(text):
+        parts.append(html.escape(text[last:]).replace("\n", "<br>\n"))
+
+    return "".join(parts)
+
+
 def extract_quote(embed: dict[str, Any]) -> dict[str, str] | None:
     if not isinstance(embed, dict):
         return None
@@ -99,6 +168,7 @@ def extract_quote(embed: dict[str, Any]) -> dict[str, str] | None:
     author_handle = author.get("handle", "")
     author_display = author.get("displayName", "") or author_handle
     text = (value.get("text") or "").strip()
+    text_html = render_rich_text_html(text, value.get("facets"))
     uri = record_view.get("uri", "")
     url = at_uri_to_web_url(uri, author_handle)
 
@@ -108,6 +178,7 @@ def extract_quote(embed: dict[str, Any]) -> dict[str, str] | None:
     return {
         "author_display": author_display,
         "author_handle": author_handle,
+        "text_html": text_html,
         "text": text,
         "url": url,
     }
@@ -175,6 +246,7 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
                 continue
 
             text = (record.get("text") or "").strip()
+            text_html = render_rich_text_html(text, record.get("facets"))
             quote = extract_quote(post.get("embed") or {})
             if text and is_book_activity(text):
                 continue
@@ -192,6 +264,7 @@ def collect_posts(actor: str, days: int, max_pages: int, timeout: float) -> list
                     "created_at_unix": int(created_at.timestamp()),
                     "date_label": date_label(created_at),
                     "quote": quote,
+                    "text_html": text_html,
                     "text": text,
                     "url": post_url,
                 }

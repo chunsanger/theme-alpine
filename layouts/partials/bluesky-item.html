@@ -9,7 +9,11 @@
       </a>
     </aside>
 
-    {{ with .text }}
+    {{ if .text_html }}
+      <section class="post-body e-content">
+        {{ .text_html | safeHTML }}
+      </section>
+    {{ else with .text }}
       <section class="post-body e-content">
         {{ . | markdownify }}
       </section>
@@ -21,7 +25,9 @@
           {{ if .author_display }}{{ .author_display }}{{ else }}@{{ .author_handle }}{{ end }}
           {{ if .author_handle }}<span>@{{ .author_handle }}</span>{{ end }}
         </p>
-        {{ with .text }}
+        {{ if .text_html }}
+          <div class="bluesky-quote-text">{{ .text_html | safeHTML }}</div>
+        {{ else with .text }}
           <div class="bluesky-quote-text">{{ . | markdownify }}</div>
         {{ else }}
           <div class="bluesky-quote-text"><em>Quoted post unavailable.</em></div>
