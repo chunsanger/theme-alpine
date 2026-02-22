@@ -573,6 +573,24 @@ thead th {
   color: var(--international-orange);
 }
 
+.post-categories {
+  margin-left: calc(32px + 0.6rem);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: oklch(0.709 0.01 56.259);
+}
+
+.post-categories a {
+  color: inherit;
+}
+
+.post-categories a:hover {
+  color: var(--international-orange);
+}
+
 .bluesky-post-link a::before {
   content: "";
   margin: 0;
@@ -939,6 +957,7 @@ img.book-cover {
 
   .post-body,
   .post-tags,
+  .post-categories,
   .reply-context {
     margin-left: 0;
   }
@@ -1059,6 +1078,7 @@ html.dark-theme h3 {
 html.dark-theme .subtitle,
 html.dark-theme .post-info-date,
 html.dark-theme .post-tags,
+html.dark-theme .post-categories,
 html.dark-theme .reply-context,
 html.dark-theme .pagination,
 html.dark-theme #footer p,

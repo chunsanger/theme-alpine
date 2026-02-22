@@ -37,6 +37,35 @@
       </p>
     {{ end }}
 
+    {{ $categoryValues := slice }}
+    {{ with .Params.categories }}
+      {{ if eq (printf "%T" .) "string" }}
+        {{ $categoryValues = $categoryValues | append . }}
+      {{ else }}
+        {{ range . }}
+          {{ $categoryValues = $categoryValues | append (printf "%v" .) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ with .Params.category }}
+      {{ if eq (printf "%T" .) "string" }}
+        {{ $categoryValues = $categoryValues | append . }}
+      {{ else }}
+        {{ range . }}
+          {{ $categoryValues = $categoryValues | append (printf "%v" .) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $categoryValues = uniq $categoryValues }}
+
+    {{ if gt (len $categoryValues) 0 }}
+      <aside class="post-categories" aria-label="Categories">
+        {{ range $categoryValues }}
+          <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+        {{ end }}
+      </aside>
+    {{ end }}
+
     {{ with .Params.tags }}
       <aside class="post-tags">
         {{ range . }}

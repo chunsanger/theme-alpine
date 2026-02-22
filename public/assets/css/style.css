@@ -338,28 +338,28 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding-top: 0.55rem;
 }
 
-#post-list li {
+#post-list > li {
   list-style: none;
   margin: 0;
   padding: 0 0 1.5rem;
   border-bottom: 1px solid var(--border);
 }
 
-#post-list li:first-child {
+#post-list > li:first-child {
   padding-top: 0.7rem;
 }
 
-#wrapper[data-page-path="/"] #post-list li:first-child,
-#wrapper[data-page-path^="/page/"] #post-list li:first-child,
-#wrapper[data-page-path^="/replies"] #post-list li:first-child {
+#wrapper[data-page-path="/"] #post-list > li:first-child,
+#wrapper[data-page-path^="/page/"] #post-list > li:first-child,
+#wrapper[data-page-path^="/replies"] #post-list > li:first-child {
   padding-top: 0.95rem;
 }
 
-#post-list li + li {
+#post-list > li + li {
   margin-top: 1.5rem;
 }
 
-#post-list li:last-child {
+#post-list > li:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -570,6 +570,24 @@ thead th {
 }
 
 .post-tags a:hover {
+  color: var(--international-orange);
+}
+
+.post-categories {
+  margin-left: calc(32px + 0.6rem);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: oklch(0.709 0.01 56.259);
+}
+
+.post-categories a {
+  color: inherit;
+}
+
+.post-categories a:hover {
   color: var(--international-orange);
 }
 
@@ -939,6 +957,7 @@ img.book-cover {
 
   .post-body,
   .post-tags,
+  .post-categories,
   .reply-context {
     margin-left: 0;
   }
@@ -1059,6 +1078,7 @@ html.dark-theme h3 {
 html.dark-theme .subtitle,
 html.dark-theme .post-info-date,
 html.dark-theme .post-tags,
+html.dark-theme .post-categories,
 html.dark-theme .reply-context,
 html.dark-theme .pagination,
 html.dark-theme #footer p,
@@ -1095,7 +1115,7 @@ html.dark-theme .bluesky-quote-card {
 }
 
 html.dark-theme .tabs,
-html.dark-theme #post-list li,
+html.dark-theme #post-list > li,
 html.dark-theme #footer,
 html.dark-theme hr {
   border-color: var(--border);
