@@ -486,7 +486,8 @@ h2 {
   font-weight: 500;
 }
 
-.post-card-title {
+#post-list .post-card-title,
+#post-list .post-card-title .p-name {
   font-size: 16px;
   line-height: 1.35;
   font-weight: 500;
