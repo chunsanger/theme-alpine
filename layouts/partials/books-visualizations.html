@@ -144,7 +144,7 @@
     {{ end }}
   {{ end }}
 
-  {{ $annualYears = sort $annualYears "desc" }}
+  {{ $annualYears = reverse (sort $annualYears) }}
   {{ $maxMetric := 0 }}
   {{ range $annualYears }}
     {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" .)) }}
