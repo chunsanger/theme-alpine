@@ -144,11 +144,17 @@
     {{ end }}
   {{ end }}
 
-  {{ $annualYears = reverse (sort $annualYears) }}
-  {{ $maxMetric := 0 }}
+  {{ $annualYearItems := slice }}
   {{ range $annualYears }}
-    {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" .)) }}
-    {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" .)) }}
+    {{ $annualYearItems = $annualYearItems | append (dict "year" (int .) "label" .) }}
+  {{ end }}
+  {{ $annualYearItems = sort $annualYearItems "year" "desc" }}
+
+  {{ $maxMetric := 0 }}
+  {{ range $annualYearItems }}
+    {{ $yearLabel := .label }}
+    {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" $yearLabel)) }}
+    {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" $yearLabel)) }}
     {{ $metric := $yearPages }}
     {{ if le $metric 0 }}
       {{ $metric = mul (len $yearBooks) 220 }}
@@ -231,7 +237,7 @@
     </section>
   {{ end }}
 
-  {{ if gt (len $annualYears) 0 }}
+  {{ if gt (len $annualYearItems) 0 }}
     <section class="books-visual-section annual-stacks-section">
       <h2 class="bookshelf-heading">Annual stacks of books</h2>
       <div class="annual-stacks-surface">
@@ -242,9 +248,10 @@
           {{ end }}
         </div>
         <div class="annual-stacks-columns">
-          {{ range $annualYears }}
-            {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" .)) }}
-            {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" .)) }}
+          {{ range $annualYearItems }}
+            {{ $yearLabel := .label }}
+            {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" $yearLabel)) }}
+            {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" $yearLabel)) }}
             {{ $stackMetric := $yearPages }}
             {{ if le $stackMetric 0 }}
               {{ $stackMetric = mul (len $yearBooks) 220 }}
@@ -273,7 +280,7 @@
                   <span class="annual-stack-book" style="height: {{ $spineHeight }}px; width: calc(100% - {{ $widthAdjust }}px); background: {{ $bookColor }};"></span>
                 {{ end }}
               </div>
-              <p class="annual-stack-year">{{ . }}</p>
+              <p class="annual-stack-year">{{ $yearLabel }}</p>
             </article>
           {{ end }}
         </div>
