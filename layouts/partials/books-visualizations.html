@@ -1,0 +1,283 @@
+{{ $shelves := .Site.Data.bookshelves }}
+{{ if $shelves }}
+  {{ $featuredBooks := slice }}
+  {{ $featuredSeen := newScratch }}
+  {{ $preferredFeatureShelves := slice "reading" "currently-reading" "currentlyreading" "finished-reading" "finishedreading" }}
+
+  {{ range $preferredFeatureShelves }}
+    {{ $shelfKey := . }}
+    {{ with index $shelves $shelfKey }}
+      {{ range . }}
+        {{ if lt (len $featuredBooks) 6 }}
+          {{ $title := lower (printf "%v" (default "" (index . "title"))) }}
+          {{ $author := lower (printf "%v" (default "" (index . "author"))) }}
+          {{ $isbn := printf "%v" (default "" (index . "isbn")) }}
+          {{ $bookID := $isbn }}
+          {{ if eq $bookID "" }}
+            {{ $bookID = printf "%s|%s" $title $author }}
+          {{ end }}
+          {{ if and (ne $bookID "") (not ($featuredSeen.Get $bookID)) }}
+            {{ $featuredBooks = $featuredBooks | append (dict "shelf" $shelfKey "book" .) }}
+            {{ $featuredSeen.Set $bookID true }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if lt (len $featuredBooks) 6 }}
+    {{ range $shelfKey, $books := $shelves }}
+      {{ range $books }}
+        {{ if lt (len $featuredBooks) 6 }}
+          {{ $title := lower (printf "%v" (default "" (index . "title"))) }}
+          {{ $author := lower (printf "%v" (default "" (index . "author"))) }}
+          {{ $isbn := printf "%v" (default "" (index . "isbn")) }}
+          {{ $bookID := $isbn }}
+          {{ if eq $bookID "" }}
+            {{ $bookID = printf "%s|%s" $title $author }}
+          {{ end }}
+          {{ if and (ne $bookID "") (not ($featuredSeen.Get $bookID)) }}
+            {{ $featuredBooks = $featuredBooks | append (dict "shelf" $shelfKey "book" .) }}
+            {{ $featuredSeen.Set $bookID true }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $annualSource := slice }}
+  {{ $annualSourceKeys := slice "finished-reading" "finishedreading" "finished" "read" "completed" }}
+  {{ range $annualSourceKeys }}
+    {{ with index $shelves . }}
+      {{ range . }}
+        {{ $annualSource = $annualSource | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if eq (len $annualSource) 0 }}
+    {{ range $shelfKey, $books := $shelves }}
+      {{ range $books }}
+        {{ $annualSource = $annualSource | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $annualScratch := newScratch }}
+  {{ $annualYears := slice }}
+  {{ range $annualSource }}
+    {{ $year := "" }}
+    {{ $yearCandidate := printf "%v" (default "" (index . "year")) }}
+    {{ if ne $yearCandidate "" }}
+      {{ $matches := findRE "[0-9]{4}" $yearCandidate 1 }}
+      {{ if gt (len $matches) 0 }}
+        {{ $year = index $matches 0 }}
+      {{ end }}
+    {{ end }}
+
+    {{ if eq $year "" }}
+      {{ $dateCandidates := slice
+        (printf "%v" (default "" (index . "finished_at")))
+        (printf "%v" (default "" (index . "finished_date")))
+        (printf "%v" (default "" (index . "date_finished")))
+        (printf "%v" (default "" (index . "date_read")))
+        (printf "%v" (default "" (index . "read_at")))
+        (printf "%v" (default "" (index . "post_date")))
+        (printf "%v" (default "" (index . "published_at")))
+      }}
+      {{ range $dateCandidates }}
+        {{ if and (eq $year "") (ne (trim . " \n\r\t") "") }}
+          {{ $matches := findRE "[0-9]{4}" . 1 }}
+          {{ if gt (len $matches) 0 }}
+            {{ $year = index $matches 0 }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ if eq $year "" }}
+      {{ $urlCandidates := slice
+        (printf "%v" (default "" (index . "post_url")))
+        (printf "%v" (default "" (index . "url")))
+        (printf "%v" (default "" (index . "permalink")))
+      }}
+      {{ range $urlCandidates }}
+        {{ if and (eq $year "") (ne (trim . " \n\r\t") "") }}
+          {{ $urlDate := findRE "/[0-9]{4}/[0-9]{2}/[0-9]{2}/" . 1 }}
+          {{ if gt (len $urlDate) 0 }}
+            {{ $year = replaceRE "^/([0-9]{4})/.*$" "$1" (index $urlDate 0) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ if ne $year "" }}
+      {{ $yearInt := int $year }}
+      {{ if and (ge $yearInt 1990) (le $yearInt 2100) }}
+        {{ if not (in $annualYears $year) }}
+          {{ $annualYears = $annualYears | append $year }}
+        {{ end }}
+
+        {{ $pages := 0 }}
+        {{ $pageCandidates := slice
+          (printf "%v" (default "" (index . "pages")))
+          (printf "%v" (default "" (index . "page_count")))
+          (printf "%v" (default "" (index . "num_pages")))
+          (printf "%v" (default "" (index . "book_pages")))
+        }}
+        {{ range $pageCandidates }}
+          {{ if and (eq $pages 0) (ne (trim . " \n\r\t") "") }}
+            {{ $digits := findRE "[0-9]+" . 1 }}
+            {{ if gt (len $digits) 0 }}
+              {{ $pages = int (index $digits 0) }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ $booksKey := printf "books_%s" $year }}
+        {{ $existingBooks := default (slice) ($annualScratch.Get $booksKey) }}
+        {{ $annualScratch.Set $booksKey ($existingBooks | append (dict "pages" $pages)) }}
+
+        {{ $pagesKey := printf "pages_%s" $year }}
+        {{ $currentPages := default 0 ($annualScratch.Get $pagesKey) }}
+        {{ $annualScratch.Set $pagesKey (add $currentPages $pages) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $annualYears = sort $annualYears "desc" }}
+  {{ $maxMetric := 0 }}
+  {{ range $annualYears }}
+    {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" .)) }}
+    {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" .)) }}
+    {{ $metric := $yearPages }}
+    {{ if le $metric 0 }}
+      {{ $metric = mul (len $yearBooks) 220 }}
+    {{ end }}
+    {{ if gt $metric $maxMetric }}
+      {{ $maxMetric = $metric }}
+    {{ end }}
+  {{ end }}
+  {{ if lt $maxMetric 500 }}
+    {{ $maxMetric = 500 }}
+  {{ end }}
+  {{ $scaleMax := mul (div (add $maxMetric 499) 500) 500 }}
+  {{ $tickStep := div $scaleMax 5 }}
+  {{ $spinePalette := slice "#0f172a" "#0369a1" "#10b981" "#f59e0b" "#ef4444" "#8b5cf6" "#14b8a6" "#f97316" "#1d4ed8" "#22c55e" "#e11d48" "#334155" }}
+
+  {{ if gt (len $featuredBooks) 0 }}
+    <section class="books-visual-section books-visual-covers">
+      <h2 class="bookshelf-heading">Book Visuals</h2>
+      <div class="book-visual-grid">
+        {{ range $featuredBooks }}
+          {{ $book := index . "book" }}
+          {{ $shelfKey := printf "%v" (index . "shelf") }}
+          {{ $title := default "Untitled" (index $book "title") }}
+          {{ $author := default "" (index $book "author") }}
+          {{ $cover := default "" (index $book "cover_url") }}
+          {{ $isbn := printf "%v" (default "" (index $book "isbn")) }}
+          {{ $postURL := default "" (index $book "post_url") }}
+          {{ $bookURL := "" }}
+          {{ $coverDisplay := $cover }}
+          {{ $coverFallback := $cover }}
+
+          {{ if and (ne $coverDisplay "") (in $coverDisplay "openlibrary.org") }}
+            {{ $coverDisplay = replaceRE "-[SM]\\.jpg(\\?.*)?$" "-L.jpg$1" $coverDisplay }}
+            {{ $coverFallback = $coverDisplay }}
+          {{ end }}
+          {{ if and (ne $coverDisplay "") (in $coverDisplay "openlibrary.org") }}
+            {{ $coverNoScheme := replaceRE "^https?://" "" $coverDisplay }}
+            {{ $coverDisplay = printf "https://images.weserv.nl/?url=%s&w=360&h=540&fit=cover&q=92&sharp=1&output=webp" ($coverNoScheme | urlquery) }}
+          {{ end }}
+
+          {{ if ne $isbn "" }}
+            {{ $bookURL = printf "https://micro.blog/books/%s" $isbn }}
+          {{ else if ne $postURL "" }}
+            {{ $bookURL = $postURL }}
+          {{ end }}
+
+          {{ $statusLabel := "" }}
+          {{ if or (eq $shelfKey "reading") (eq $shelfKey "currently-reading") (eq $shelfKey "currentlyreading") }}
+            {{ $statusLabel = "reading" }}
+          {{ else if or (eq $shelfKey "finished-reading") (eq $shelfKey "finishedreading") }}
+            {{ $statusLabel = "finished" }}
+          {{ end }}
+
+          <article class="book-visual-card">
+            <div class="book-visual-stage">
+              {{ if ne $statusLabel "" }}
+                <span class="book-visual-badge">{{ $statusLabel }}</span>
+              {{ end }}
+              {{ if ne $bookURL "" }}<a href="{{ $bookURL }}" class="book-visual-cover-wrap">{{ else }}<div class="book-visual-cover-wrap">{{ end }}
+                {{ if ne $cover "" }}
+                  <img class="book-visual-cover" src="{{ $coverDisplay }}" alt="{{ $title }} cover" loading="lazy" decoding="async" {{ if ne $coverDisplay $coverFallback }}onerror='this.onerror=null;this.src="{{ $coverFallback }}"'{{ end }} />
+                {{ else }}
+                  <div class="book-visual-cover book-cover-placeholder">No cover</div>
+                {{ end }}
+              {{ if ne $bookURL "" }}</a>{{ else }}</div>{{ end }}
+            </div>
+            <h3 class="book-title">
+              {{ if ne $bookURL "" }}
+                <a href="{{ $bookURL }}">{{ $title }}</a>
+              {{ else }}
+                {{ $title }}
+              {{ end }}
+            </h3>
+            {{ if ne $author "" }}
+              <p class="book-author">{{ $author }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ if gt (len $annualYears) 0 }}
+    <section class="books-visual-section annual-stacks-section">
+      <h2 class="bookshelf-heading">Annual stacks of books</h2>
+      <div class="annual-stacks-surface">
+        <div class="annual-stack-axis" aria-hidden="true">
+          {{ range seq 0 5 }}
+            {{ $value := sub $scaleMax (mul . $tickStep) }}
+            <span>{{ $value }}</span>
+          {{ end }}
+        </div>
+        <div class="annual-stacks-columns">
+          {{ range $annualYears }}
+            {{ $yearBooks := default (slice) ($annualScratch.Get (printf "books_%s" .)) }}
+            {{ $yearPages := default 0 ($annualScratch.Get (printf "pages_%s" .)) }}
+            {{ $stackMetric := $yearPages }}
+            {{ if le $stackMetric 0 }}
+              {{ $stackMetric = mul (len $yearBooks) 220 }}
+            {{ end }}
+            {{ $stackHeight := add 56 (div (mul $stackMetric 270) $scaleMax) }}
+            {{ if lt $stackHeight 56 }}
+              {{ $stackHeight = 56 }}
+            {{ end }}
+            <article class="annual-stack-column">
+              <p class="annual-stack-stats">
+                <strong>{{ len $yearBooks }} books</strong>
+                {{ if gt $yearPages 0 }}<span>&nbsp;|&nbsp;{{ $yearPages }} pages</span>{{ end }}
+              </p>
+              <div class="annual-stack-books" style="height: {{ $stackHeight }}px;">
+                {{ range $idx, $book := $yearBooks }}
+                  {{ $pages := index $book "pages" }}
+                  {{ $spineHeight := 14 }}
+                  {{ if gt $pages 0 }}
+                    {{ $spineHeight = add 10 (div $pages 55) }}
+                  {{ end }}
+                  {{ if gt $spineHeight 34 }}
+                    {{ $spineHeight = 34 }}
+                  {{ end }}
+                  {{ $bookColor := index $spinePalette (mod $idx (len $spinePalette)) }}
+                  {{ $widthAdjust := mul (mod (add $idx (len $yearBooks)) 6) 2 }}
+                  <span class="annual-stack-book" style="height: {{ $spineHeight }}px; width: calc(100% - {{ $widthAdjust }}px); background: {{ $bookColor }};"></span>
+                {{ end }}
+              </div>
+              <p class="annual-stack-year">{{ . }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
