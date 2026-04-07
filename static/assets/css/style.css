@@ -319,6 +319,30 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding-top: 0.55rem;
 }
 
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem;
+  align-items: start;
+  margin: 0.95rem 0 0;
+}
+
+.photos-grid .somepics_item {
+  display: block;
+}
+
+.photos-grid .somepics_link,
+.photos-grid img {
+  display: block;
+  width: 100%;
+}
+
+.photos-grid .somepics_caption {
+  margin-top: 0.45rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
 .page-title {
   margin: 0.8rem 0 1.25rem;
   font-size: 1.25rem;
