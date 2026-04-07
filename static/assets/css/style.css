@@ -370,6 +370,10 @@ article.post {
   flex-direction: column;
 }
 
+article.post:not(.books-page) {
+  padding-top: 0.95rem;
+}
+
 article.h-entry > *,
 article.post > * {
   margin: 0;
