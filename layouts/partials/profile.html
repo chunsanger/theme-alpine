@@ -2,6 +2,7 @@
 {{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
 {{ $isPosts := hasPrefix $current "/posts" }}
 {{ $isNotes := hasPrefix $current "/notes" }}
+{{ $isPhotos := hasPrefix $current "/photos" }}
 {{ $currentNoSlash := strings.TrimSuffix "/" $current }}
 {{ $defaultFollowURL := "https://micro.blog" }}
 {{ with .Site.Author.username }}
@@ -40,6 +41,7 @@
   <a href="/posts/" class="{{ if $isPosts }}active{{ end }}">Posts</a>
   <a href="/notes/" class="{{ if $isNotes }}active{{ end }}">Notes</a>
   <a href="/replies/" class="{{ if $isReplies }}active{{ end }}">Replies</a>
+  <a href="/photos/" class="{{ if $isPhotos }}active{{ end }}">Photos</a>
 
   {{ range .Site.Menus.main }}
     {{ $menuURL := .URL | relLangURL }}
@@ -50,7 +52,7 @@
         {{ $href = . }}
       {{ end }}
     {{ end }}
-    {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) (not (hasPrefix $menuURL "/notes")) (not (hasPrefix $menuURL "/archive")) (ne (lower .Name) "about") (ne (lower .Name) "gear") }}
+    {{ if and (ne $menuURL "/") (not (hasPrefix $menuURL "/posts")) (not (hasPrefix $menuURL "/replies")) (not (hasPrefix $menuURL "/notes")) (not (hasPrefix $menuURL "/photos")) (not (hasPrefix $menuURL "/archive")) (ne (lower .Name) "about") (ne (lower .Name) "gear") }}
       <a href="{{ $href }}" class="{{ if or (eq $currentNoSlash $menuNoSlash) (and (ne $menuNoSlash "") (hasPrefix $currentNoSlash (printf "%s/" $menuNoSlash))) }}active{{ end }}">{{ .Name }}</a>
     {{ end }}
   {{ end }}
