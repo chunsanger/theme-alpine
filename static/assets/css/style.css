@@ -372,6 +372,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 #wrapper[data-page-path="/"] #post-list,
 #wrapper[data-page-path^="/page/"] #post-list,
 #wrapper[data-page-path^="/replies"] #post-list,
+#wrapper[data-page-path^="/posts"] #post-list,
 #wrapper[data-page-path^="/photos"] #post-list {
   padding-top: 0.55rem;
 }
@@ -390,6 +391,7 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
 #wrapper[data-page-path="/"] #post-list > li:first-child,
 #wrapper[data-page-path^="/page/"] #post-list > li:first-child,
 #wrapper[data-page-path^="/replies"] #post-list > li:first-child,
+#wrapper[data-page-path^="/posts"] #post-list > li:first-child,
 #wrapper[data-page-path^="/photos"] #post-list > li:first-child {
   padding-top: 0.95rem;
 }
