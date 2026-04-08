@@ -311,6 +311,11 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   padding-top: 0.7rem;
 }
 
+#wrapper[data-page-path^="/photos"] > :first-child,
+#wrapper[data-page-path*="photo"] > :first-child {
+  margin-top: 0.95rem;
+}
+
 #wrapper[data-page-path^="/archive"] {
   padding-top: 0.7rem;
 }

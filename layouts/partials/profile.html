@@ -1,10 +1,11 @@
 {{ $current := .RelPermalink }}
+{{ $currentLower := lower $current }}
 {{ $isReplies := or (eq .Section "reply") (hasPrefix $current "/replies") }}
 {{ $isPosts := hasPrefix $current "/posts" }}
 {{ $isNotes := hasPrefix $current "/notes" }}
 {{ $pageTitle := lower (default "" .Title) }}
 {{ $pageLinkTitle := lower (default "" .LinkTitle) }}
-{{ $isPhotos := or (hasPrefix $current "/photos") (eq $pageTitle "photos") (eq $pageLinkTitle "photos") (in $current "/photos") }}
+{{ $isPhotos := or (hasPrefix $current "/photos") (eq $pageTitle "photos") (eq $pageLinkTitle "photos") (in $currentLower "/photos") (in $currentLower "photo") }}
 {{ $currentNoSlash := strings.TrimSuffix "/" $current }}
 {{ $defaultFollowURL := "https://micro.blog" }}
 {{ with .Site.Author.username }}
@@ -39,7 +40,7 @@
 </section>
 
 <nav class="tabs" aria-label="Sections">
-  <a href="/" class="{{ if and .IsHome (not $isPosts) (not $isNotes) (not $isReplies) (not $isPhotos) }}active{{ end }}">All</a>
+  <a href="/" class="{{ if eq $current "/" }}active{{ end }}">All</a>
   <a href="/posts/" class="{{ if $isPosts }}active{{ end }}">Posts</a>
   <a href="/notes/" class="{{ if $isNotes }}active{{ end }}">Notes</a>
   <a href="/replies/" class="{{ if $isReplies }}active{{ end }}">Replies</a>
