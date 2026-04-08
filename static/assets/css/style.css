@@ -332,6 +332,14 @@ html:not(.light-theme) .dark-mode-toggle[aria-checked="true"]::after {
   margin: 0.95rem 0 0;
 }
 
+.photos-grid-container {
+  margin-top: 0.95rem;
+}
+
+.photos-grid-container a {
+  display: block;
+}
+
 .photos-grid .somepics_item {
   display: block;
 }

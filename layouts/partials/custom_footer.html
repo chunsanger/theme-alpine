@@ -1,0 +1,36 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var path = window.location.pathname || "/";
+    var wrapper = document.getElementById("wrapper");
+    var tabs = document.querySelectorAll(".tabs a");
+
+    if (wrapper) {
+      wrapper.setAttribute("data-page-path", path);
+    }
+
+    if (!tabs.length) {
+      return;
+    }
+
+    var activeHref = "/";
+    if (path.indexOf("/posts") === 0) {
+      activeHref = "/posts/";
+    } else if (path.indexOf("/notes") === 0) {
+      activeHref = "/notes/";
+    } else if (path.indexOf("/replies") === 0) {
+      activeHref = "/replies/";
+    } else if (path.indexOf("/photos") === 0 || path.indexOf("photo") !== -1) {
+      activeHref = "/photos/";
+    } else if (path.indexOf("/books") === 0) {
+      activeHref = "/books/";
+    }
+
+    tabs.forEach(function (tab) {
+      if (tab.getAttribute("href") === activeHref) {
+        tab.classList.add("active");
+      } else {
+        tab.classList.remove("active");
+      }
+    });
+  });
+</script>
