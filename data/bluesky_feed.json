@@ -1,7 +1,7 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-05-03T00:42:16.737429Z",
+  "generated_at": "2026-05-03T06:54:26.398144Z",
   "posts": [
     {
       "author_display": "Chris Hunsanger",
@@ -58,34 +58,6 @@
       "text_html": "I took the excellent work by <a href=\"https://bsky.app/profile/did:plc:lprqqpoyjspuma25n5gofocf\" target=\"_blank\" rel=\"noopener noreferrer\">@josephjefe.bsky.social</a>  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. <br>\n<br>\n<a href=\"https://hunsanger.shinyapps.io/shiny/\" target=\"_blank\" rel=\"noopener noreferrer\">hunsanger.shinyapps.io/shiny/</a>",
       "text": "I took the excellent work by @josephjefe.bsky.social  and did some customizations to come up with some additional data points (PFF Snaps and rating data) to evaluate salary cap info, and hosted my first Shiny app which allows anyone to run this for all 32 teams. \n\nhunsanger.shinyapps.io/shiny/",
       "url": "https://bsky.app/profile/hunsanger.com/post/3mdh6rlz7pc2o"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2025-11-04T03:15:27Z",
-      "created_at_unix": 1762226127,
-      "date_label": "Nov 4, 2025",
-      "is_repost": false,
-      "reposted_by_display": "",
-      "reposted_by_handle": "",
-      "quote": null,
-      "text_html": "Got bored, built a macOS swift BlueSky app.<br>\n<br>\nWorking:<br>\n- Posting to BlueSky<br>\n- Replying to posts<br>\n- Timeline<br>\n- Bookmarks<br>\n- Profile view<br>\n<br>\nNot Working (yet):<br>\n- Notifications<br>\n- Quality search<br>\n<br>\nI’m not sure how far I’ll take this at this point, but a fun exercise in creating a macOS app.",
-      "text": "Got bored, built a macOS swift BlueSky app.\n\nWorking:\n- Posting to BlueSky\n- Replying to posts\n- Timeline\n- Bookmarks\n- Profile view\n\nNot Working (yet):\n- Notifications\n- Quality search\n\nI’m not sure how far I’ll take this at this point, but a fun exercise in creating a macOS app.",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3m4skk5dhns2n"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2025-11-04T03:11:55.240000Z",
-      "created_at_unix": 1762225915,
-      "date_label": "Nov 4, 2025",
-      "is_repost": false,
-      "reposted_by_display": "",
-      "reposted_by_handle": "",
-      "quote": null,
-      "text_html": "Test post… from my macOS BlueSky Swift native app.",
-      "text": "Test post… from my macOS BlueSky Swift native app.",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3m4rksvsp6p2f"
     }
   ]
 }
