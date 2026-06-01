@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-06-01T00:53:23.313267Z",
+  "generated_at": "2026-06-01T07:50:28.592764Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-06-01T01:07:59Z",
+      "created_at_unix": 1780276079,
+      "date_label": "Jun 1, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Early days, but I took <a href=\"https://micro.blog/viticci@mastodon.social\" target=\"_blank\" rel=\"noopener noreferrer\">@viticci@mastodon.social</a> ’s excellent REMCTL work and input it into my a vibe-coded weekend project to make an updated Things-esque app for Reminders.<br>\n<br>\nNot fully functional yet, but neat to get sub-sections working as well as proper tagging.",
+      "text": "Early days, but I took @viticci@mastodon.social ’s excellent REMCTL work and input it into my a vibe-coded weekend project to make an updated Things-esque app for Reminders.\n\nNot fully functional yet, but neat to get sub-sections working as well as proper tagging.",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mn6ve5xao72w"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
