@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-06-20T12:40:08.265136Z",
+  "generated_at": "2026-06-20T18:32:49.241085Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-06-20T16:30:17.835000Z",
+      "created_at_unix": 1781973017,
+      "date_label": "Jun 20, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Playing around with the new Safari vibe coded extensions feature, and while it is a bit flakey, was able to pretty easily whip up an @kepano flexoki theme for Mastodon.",
+      "text": "Playing around with the new Safari vibe coded extensions feature, and while it is a bit flakey, was able to pretty easily whip up an @kepano flexoki theme for Mastodon.",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3moqbqguoap2v"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
