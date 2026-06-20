@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-06-20T00:50:39.305274Z",
+  "generated_at": "2026-06-20T07:23:26.212687Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-06-20T01:49:41.766000Z",
+      "created_at_unix": 1781920181,
+      "date_label": "Jun 20, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "#11ty keeps surprising me with it&#x27;s flexibility and the way it can work with YAML/frontmatter. For example, I decided I wanted to add a navigation group for a few pages on my site, and just configured 11ty to support reading a new navGroup and navGroupOrder YAML field along with a nav true/false YA…",
+      "text": "#11ty keeps surprising me with it's flexibility and the way it can work with YAML/frontmatter. For example, I decided I wanted to add a navigation group for a few pages on my site, and just configured 11ty to support reading a new navGroup and navGroupOrder YAML field along with a nav true/false YA…",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mooqjrd5qw2i"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
