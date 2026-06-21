@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-06-20T18:32:49.241085Z",
+  "generated_at": "2026-06-21T00:56:11.242438Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-06-21T00:12:24.591000Z",
+      "created_at_unix": 1782000744,
+      "date_label": "Jun 21, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Hunsanger Studio Update<br>\n<br>\n<a href=\"https://hunsanger.me/hunsanger-studio-update/\" target=\"_blank\" rel=\"noopener noreferrer\">https://hunsanger.me/hunsanger-studio-update/</a>",
+      "text": "Hunsanger Studio Update\n\nhttps://hunsanger.me/hunsanger-studio-update/",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mor3kr4br52o"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
