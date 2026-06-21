@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-06-21T12:43:18.210863Z",
+  "generated_at": "2026-06-21T18:34:09.188695Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-06-21T14:36:51.687000Z",
+      "created_at_unix": 1782052611,
+      "date_label": "Jun 21, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Fun little design enhancements to Hunsanger Studio:<br>\n- Notification count indicator<br>\n- Inclusion of <a href=\"http://Hunsanger.me\" target=\"_blank\" rel=\"noopener noreferrer\">Hunsanger.me</a> logo <br>\n- International Orange color accent (to match the site theme)<br>\n- Also added a publish preflight checklist",
+      "text": "Fun little design enhancements to Hunsanger Studio:\n- Notification count indicator\n- Inclusion of Hunsanger.me logo \n- International Orange color accent (to match the site theme)\n- Also added a publish preflight checklist",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mosluieh272o"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
