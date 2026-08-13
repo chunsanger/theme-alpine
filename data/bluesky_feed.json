@@ -1,7 +1,7 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-08-13T13:04:23.840229Z",
+  "generated_at": "2026-08-13T18:59:32.828428Z",
   "posts": [
     {
       "author_display": "Chris Hunsanger",
@@ -198,20 +198,6 @@
       "text_html": "#rainbow in the smokies",
       "text": "#rainbow in the smokies",
       "url": "https://bsky.app/profile/hunsanger.com/post/3mihzuxw7gu2g"
-    },
-    {
-      "author_display": "Chris Hunsanger",
-      "author_handle": "hunsanger.com",
-      "created_at": "2026-02-14T18:00:20.104000Z",
-      "created_at_unix": 1771092020,
-      "date_label": "Feb 14, 2026",
-      "is_repost": false,
-      "reposted_by_display": "",
-      "reposted_by_handle": "",
-      "quote": null,
-      "text_html": "I got access to RStudio&#x27;s AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
-      "text": "I got access to RStudio's AI enhanced beta, and oh my is it nice... Much number crunching to be had here, and way easier then copy/pasting between Claude Code/Codex and RStudio.",
-      "url": "https://bsky.app/profile/hunsanger.com/post/3metlzfm3us26"
     }
   ]
 }
