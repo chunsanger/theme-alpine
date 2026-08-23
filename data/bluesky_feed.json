@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-08-22T18:26:19.319454Z",
+  "generated_at": "2026-08-23T01:11:11.086055Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-08-23T01:05:32.924000Z",
+      "created_at_unix": 1787447132,
+      "date_label": "Aug 23, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Took about 15min of prompting with Codex (5.5-Medium) but I have successfully built a unidirectional bridge between my bookmarking app of choice (homegrown app but it is a combo of Linkthings + <a href=\"http://Raindrop.io\" target=\"_blank\" rel=\"noopener noreferrer\">Raindrop.io</a>)  and <a href=\"https://bsky.app/profile/did:plc:ixi4v5bwuuq4xm6rsxkrsltc\" target=\"_blank\" rel=\"noopener noreferrer\">@craft.do</a> .",
+      "text": "Took about 15min of prompting with Codex (5.5-Medium) but I have successfully built a unidirectional bridge between my bookmarking app of choice (homegrown app but it is a combo of Linkthings + Raindrop.io)  and @craft.do .",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mtplvsyz3s2u"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
