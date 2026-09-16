@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-09-15T20:52:01.578429Z",
+  "generated_at": "2026-09-16T03:21:48.300564Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-09-16T00:56:05.929000Z",
+      "created_at_unix": 1789520165,
+      "date_label": "Sep 16, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "&gt; nurb gives the AI you already talk to real CAD skills. Say what you need, watch it take shape live, hit print.  <br>\n<br>\n  <br>\n<br>\nIt is rare for me to try an app and immediately fall in love but that is what happened with Nurb, which scratches my design itch with the helpfulness of AI tool…<br>\n<br>\n<a href=\"https://nurb.dev/\" target=\"_blank\" rel=\"noopener noreferrer\">https://nurb.dev/</a>",
+      "text": "> nurb gives the AI you already talk to real CAD skills. Say what you need, watch it take shape live, hit print.  \n\n  \n\nIt is rare for me to try an app and immediately fall in love but that is what happened with Nurb, which scratches my design itch with the helpfulness of AI tool…\n\nhttps://nurb.dev/",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3mvlwky32gi2c"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
