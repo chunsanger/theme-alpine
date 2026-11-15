@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-11-14T21:57:58.079756Z",
+  "generated_at": "2026-11-15T04:50:09.217706Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-11-15T01:24:00.293000Z",
+      "created_at_unix": 1794705840,
+      "date_label": "Nov 15, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "Have the new HomeView setup and working, and my quick takeaways: <br>\n1. The screen is great. <br>\n2. It is more responsive then I expected<br>\n3. Sounds fine, but going to explore having it “permanently” casting to my Sonos Era 300 <br>\n4. 3rd party app support feels half-baked and limited.",
+      "text": "Have the new HomeView setup and working, and my quick takeaways: \n1. The screen is great. \n2. It is more responsive then I expected\n3. Sounds fine, but going to explore having it “permanently” casting to my Sonos Era 300 \n4. 3rd party app support feels half-baked and limited.",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3n2cu43j7d62g"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
