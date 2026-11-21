@@ -1,8 +1,22 @@
 {
   "actor": "hunsanger.com",
   "days": 180,
-  "generated_at": "2026-11-21T14:12:39.876124Z",
+  "generated_at": "2026-11-21T22:45:45.915479Z",
   "posts": [
+    {
+      "author_display": "Chris Hunsanger",
+      "author_handle": "hunsanger.com",
+      "created_at": "2026-11-21T18:48:32.378000Z",
+      "created_at_unix": 1795286912,
+      "date_label": "Nov 21, 2026",
+      "is_repost": false,
+      "reposted_by_display": "",
+      "reposted_by_handle": "",
+      "quote": null,
+      "text_html": "I wonder if we are nearing a point where Apple will make paid developer accounts more accessible (thinking as part of iCloud+ maybe?) to encourage self building apps. Feels like that is where things are going quickly. I also wonder if this means a transition back to paid (non-subscription) apps?",
+      "text": "I wonder if we are nearing a point where Apple will make paid developer accounts more accessible (thinking as part of iCloud+ maybe?) to encourage self building apps. Feels like that is where things are going quickly. I also wonder if this means a transition back to paid (non-subscription) apps?",
+      "url": "https://bsky.app/profile/hunsanger.com/post/3n2trbexd6k2m"
+    },
     {
       "author_display": "Chris Hunsanger",
       "author_handle": "hunsanger.com",
